@@ -105,12 +105,12 @@ public class CarouselController {
 
 
         // Create a new carousel object with the image path and the fetched carousel object
-        Carousel carousel = new Carousel("/api/carousel?link=images/" + fileName);
+        Carousel carousel = new Carousel("/api/picture?link=images/" + fileName);
         carouselRepository.save(carousel);
 
         // Create a response with the picture ID and image URL
         Map<String, Object> response = new HashMap<>();
-        response.put("link", "/api/carousel?link=images/" + fileName);
+        response.put("link", "/api/picture?link=images/" + fileName);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)

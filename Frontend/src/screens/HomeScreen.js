@@ -1,71 +1,24 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-
-
-
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import DiseaseCard from '../components/DiseaseCard';
-import { listDiseases } from '../actions/diseaseActions';
-// import {sliderPicture} from '../actions/pictureActions'; 
-
-
+import React from 'react';
 import Slider from '../components/Slider';
 
-import Paginate from '../components/Paginate'
-
-
-
 function HomeScreen() {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const crop_title = queryParams.get('crop');
-    const search = queryParams.get('search');
-
-    const dispatch = useDispatch();
-
-    const diseaseList = useSelector(state => state.diseaseList);
-    const { loading, error ,diseases, cur_page, total_page } = diseaseList;
-
-    // const pictureSlider = useSelector(state => state.pictureSlider);
-    // const { error:errorSliser, diseases:diseaseSlider } = pictureSlider;
-
-
-    useEffect(() => {
-        if (crop_title && search) {
-            dispatch(listDiseases({crop:crop_title, search:search}))
-        } else if (crop_title) {
-            dispatch(listDiseases({crop:crop_title}))
-        } else if (search) {
-            dispatch(listDiseases({search:search}))
-        } else {
-            dispatch(listDiseases())
-        }
-    }, [dispatch, crop_title, search])
-
-    // useEffect(() => {
-    //     dispatch(sliderPicture())
-    // }, [dispatch])
+    // Mock data representing carousel image URLs
+    const carouselImages = [
+        "/api/carousel?link=images/1712052749120_1.jpg",
+        "/api/carousel?link=images/1712053034890_2.jpg",
+        "/api/carousel?link=images/1712053045356_3.jpg",
+        "/api/carousel?link=images/1712053053983_4.jpg",
+        "/api/carousel?link=images/1712053062832_5.jpg",
+        "/api/carousel?link=images/1712053069905_6.jpg",
+        "/api/carousel?link=images/1712053076240_7.jpg"
+    ];
 
     return (
         <>  
             <div className='mt-5'></div>
-            {loading ? (<Loader />) : error ? <></> :<Slider items={diseases}/>}
-            
-
-            <div className='lg:px-20 mt-10'>
-                {loading ? (<Loader />) : error ? (<Message message={error} />) : <div className=' grid lg:grid-cols-5 md:grid-cols-3  gap-2 flex-col items-center justify-center '>
-                    {diseases.map((disease) => <DiseaseCard key={disease.id} disease={disease} />)}
-                
-                </div>}
-                <div className="flex justify-center m-10">
-                {loading ? <></> : error ? <></> :<Paginate pages={total_page} page={cur_page} dispatcher_action={listDiseases}/>}
-                </div>
-                
-            </div>
+            <Slider items={carouselImages} />
         </>
-    )
+    );
 }
 
-export default HomeScreen
+export default HomeScreen;
