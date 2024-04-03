@@ -39,6 +39,19 @@ public class CarouselController {
     }
 
     @GetMapping("/carousel")
+    public ResponseEntity<?> getAllCarouselPictures() {
+        // Fetch the corresponding carousel object from the database using the carouselId
+        List<Carousel> carousel = carouselRepository.findAll();
+        if (carousel.isEmpty()) {
+            // If the carouselId does not match any existing carousel, return a response with the "picture not found" message
+            Map<String, String> responseMessage = new HashMap<>();
+            responseMessage.put("message", "Picture not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseMessage);
+        }
+        return ResponseEntity.ok().body(carousel);
+    }
+
+    @GetMapping("/picture")
     public ResponseEntity<Resource> showPicture(@RequestParam("link") String imagePath) throws IOException {
         // Concatenate the base image path with the relative image path from the request parameter
         String baseImagePath = "src/main/resources/";
