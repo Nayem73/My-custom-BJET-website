@@ -1,0 +1,73 @@
+.hero-container {
+  position: relative;
+  height: 100vh;
+  /* Set the height of the hero container to viewport height */
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  /* Ensure content is above carousel */
+}
+
+.carousel-img-container {
+  height: calc(100vh - 130px);
+  /* Adjust as needed to leave space for hero content */
+  overflow: hidden;
+  /* Hide overflow to prevent scrolling */
+}
+
+.carousel-img-container img {
+  width: 100%;
+  height: auto;
+  /* Allow images to adjust height while maintaining aspect ratio */
+}
+
+.carousel {
+  position: relative;
+  z-index: 1;
+  /* Ensure carousel is behind content */
+}
+
+.hero-btns {
+  margin-top: 32px;
+}
+
+.hero-btns .btn {
+  margin: 6px;
+}
+
+.fa-play-circle {
+  margin-left: 4px;
+}
+
+@media screen and (max-width: 960px) {
+  .hero-container>h1 {
+    font-size: 70px;
+    margin-top: -150px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-container>h1 {
+    font-size: 50px;
+    margin-top: -100px;
+  }
+
+  .hero-container>p {
+    font-size: 30px;
+  }
+
+  .btn-mobile {
+    display: block;
+    text-decoration: none;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
