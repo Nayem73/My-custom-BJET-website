@@ -122,4 +122,29 @@ public class CarouselController {
         String fileName = file.getOriginalFilename();
         return fileName != null && (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png"));
     }
+
+    @GetMapping("/aboutus")
+    public ResponseEntity<Map<String, String>> getAboutUs() {
+        String aboutUs = "Waseda University has been participating in the \"Miyazaki-Bangladesh Model,\" an industry-government-academia collaborative project to introduce advanced ICT human resources since 2017, from the planning stage of the JICA technical cooperation project Japan\"Bangladesh-Japan ICT Engineers' Training Program (B-JET),\" which has been implemented since 2017. We dispatched Japanese teachers from November 2017 to October 2020. In addition, the Japanese × IT Internship Program (JIP), which was supported Japanese×by Miyazaki City, accepted B-JET graduates for short-term study abroad programs and provided internships and Japanese education at companies to support their employment and retention in the community.\n" +
+                "\n" +
+                "In the first phase of the B-JET Programme, 265 students completed the program in eight periods from November 2017 to October 2020, of which 57 participated in the JIP at the university. Of these, 50 are employed in Miyazaki Prefecture, and a total of 24 companies have accepted them. Of the 186 B-JET graduates who have found employment in Japan, this is the second largest number of employees in Japan after Tokyo, and is attracting attention as an initiative to support the introduction of unique regional human resources.";
+
+        Map<String, String> response = new HashMap<>();
+        response.put("aboutUs", aboutUs);
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/testimonial")
+    public ResponseEntity<Map<String, String>> getTestimonial() {
+        Map<String, String> response = new HashMap<>();
+        String name = "Md. Sazzad Hossain";
+        String role = "System Engineer from Co-Well Co., Ltd.";
+        String testimonial = "As a fresh graduate with the dream to join a reputed IT firm in Japan, it seemed hard, and I felt lost at first. However, soon with the help of B-JET, I was finally able to reach my goal. This is a program for people who have a passion to build their careers in Japan with the goal to learn and develop. If you have a strong conviction, determined about reaching your target, B-JET will surely guide you to the best of its abilities and help you reach your goal.";
+        response.put("name", name);
+        response.put("role", role);
+        response.put("testimonial", testimonial);
+
+        return ResponseEntity.ok().body(response);
+    }
 }
