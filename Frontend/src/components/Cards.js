@@ -5,7 +5,14 @@ import CardItem from './CardItem';
 function Cards() {
   return (
     <div className='cards'>
-      <h1>Check out these EPIC Destinations!</h1>
+      <h1>At B-JET</h1>
+      <p style={{ textAlign: 'center', fontSize: '1.2rem', fontWeight: 'bold' }}>
+        Under the mission of "creating people and organizations that challenge the social issues and possibilities of Bangladesh and Miyazaki," we aim to acquire the minimum Japanese language skills necessary for ICT human resources in Bangladesh to work in the ICT market in Japan, as well as the knowledge necessary for living and working in Japan in 20 weeks (400 credit hours).
+      </p>
+       <div className='cards__buttons'>
+        <button>Background & Achievements</button>
+        <button>Program Contents</button>
+      </div>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
