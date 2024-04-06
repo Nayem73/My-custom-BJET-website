@@ -144,16 +144,6 @@ function Header() {
                                 </label>
                                 <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
 
-
-                                    <li className='searchBox_id2'>
-                                        <Select className='p-0 bg-dark rounded-lg ml-5'
-                                            options={options}
-                                            onChange={selectedCrop}
-                                        />
-                                    </li>
-                                    <li className='searchBox_id2'><SearchBox crop={selectedOption} /></li>
-
-
                                     <li>
                                         <Link to={'/review'} className="justify-between">
                                             Review
