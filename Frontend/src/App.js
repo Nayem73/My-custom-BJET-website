@@ -2,12 +2,17 @@ import './App.css';
 
 // Nayem
 import {useState, useEffect} from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 import api from './api/axiosConfig';
 import Layout from './components/Layout';
 // import Home from './components/home/Home';
 import Navbar from './components/Navbar';
 import Home from './components/pages/Home';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import ReviewScreen from './screens/ReviewScreen';
+import HomeScreen from './screens/HomeScreen';
+import Header from './components/Header';
 
 function App() {
   const [carouselItems, setCarouselItems] = useState([]);
@@ -37,10 +42,14 @@ function App() {
 
   return (
     <>
-        <Navbar />
+        <Header />
         <Routes>
           {/* <Route path='/' element={<Home carouselItems={carouselItems} aboutUs={aboutUs}/>} /> */}
           <Route path='/' element={<Home />} />
+          <Route path='/login' element={<LoginScreen />} />
+          <Route path='/register' element={<RegisterScreen />} />
+          <Route path='/review' element={<ReviewScreen />} />
+          <Route exact path='/' element={<HomeScreen />} />
         </Routes>
     </>
   );  

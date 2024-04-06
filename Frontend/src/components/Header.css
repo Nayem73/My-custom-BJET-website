@@ -1,0 +1,54 @@
+/* Header.css */
+
+.navbar {
+    background-color: var(--navbar-bg-color);
+    /* Use CSS variable for background color */
+    padding: 1rem 2rem;
+}
+
+.navbar img {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1rem;
+}
+
+.navbar button {
+    color: var(--button-text-color);
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.search-box {
+    margin-left: 1rem;
+}
+
+.dropdown.dropdown-end {
+    position: relative;
+}
+
+.dropdown.dropdown-end .btn.btn-ghost.btn-circle {
+    padding: 0.5rem;
+}
+
+.menu.menu-compact.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+}
+
+.menu.menu-compact.dropdown-content li {
+    padding: 0.5rem 1rem;
+}
+
+.menu.menu-compact.dropdown-content li a {
+    color: #333;
+}
+
+.menu.menu-compact.dropdown-content li:hover {
+    background-color: #f0f0f0;
+}
