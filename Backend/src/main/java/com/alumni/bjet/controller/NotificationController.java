@@ -34,12 +34,4 @@ public class NotificationController {
             @RequestParam String message) {
         return notificationService.sendNotification(senderUsername, recipientUsername, message);
     }
-
-    @PostMapping("/{notificationId}/reply")
-    public ResponseEntity<?> replyToNotification(
-            @PathVariable Long notificationId,
-            @RequestParam Long senderId,
-            @RequestParam String replyMessage) {
-        return notificationService.replyToNotification(notificationId, senderId, replyMessage);
-    }
 }

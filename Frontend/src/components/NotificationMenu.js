@@ -23,10 +23,6 @@ export default function NotificationMenu({ userInfo }) {
     setMessage(''); // Clear message after sending
   };
 
-  const replyHandler = (notificationId) => {
-    dispatch(replyToNotification(notificationId, userInfo.username, replyMessage));
-    setReplyMessage(''); // Clear reply message after sending
-  };
 
   return (
     <div>
@@ -35,15 +31,6 @@ export default function NotificationMenu({ userInfo }) {
         <input type="text" placeholder="Recipient Username" value={recipientUsername} onChange={(e) => setRecipientUsername(e.target.value)} />
         <input type="text" placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} />
         <button onClick={sendHandler}>Send</button>
-      </div>
-      <div>
-        {notifications && notifications.map(notification => (
-          <div key={notification.id}>
-            <p>{notification.message}</p>
-            <input type="text" placeholder="Reply message" value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
-            <button onClick={() => replyHandler(notification.id)}>Reply</button>
-          </div>
-        ))}
       </div>
     </div>
   );

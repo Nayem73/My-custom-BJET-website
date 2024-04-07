@@ -50,18 +50,4 @@ public class NotificationService {
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Notification sent successfully.");
     }
-
-
-    public ResponseEntity<?> replyToNotification(Long notificationId, Long senderId, String replyMessage) {
-        NotificationInfo notification = notificationRepository.findById(notificationId)
-                .orElseThrow(() -> new RuntimeException("Notification not found with id: " + notificationId));
-
-        if (!notification.getRecipientId().equals(senderId)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are not authorized to reply to this notification.");
-        }
-
-        notification.setMessage(replyMessage);
-        notificationRepository.save(notification);
-        return ResponseEntity.ok().body("Reply sent successfully.");
-    }
 }

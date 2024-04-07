@@ -23,16 +23,3 @@ export const sendNotification = (senderUsername, recipientUsername, message) => 
     });
   }
 };
-
-
-export const replyToNotification = (notificationId, senderId, replyMessage) => async (dispatch) => {
-  try {
-    await axios.post(`/api/notification/${notificationId}/reply`, { senderId, replyMessage });
-    dispatch(listNotifications());
-  } catch (error) {
-    dispatch({
-      type: 'NOTIFICATION_REPLY_FAILED',
-      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
-    });
-  }
-};
