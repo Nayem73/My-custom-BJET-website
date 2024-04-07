@@ -84,7 +84,7 @@ function Header() {
             <div className=" container  top-0 mx-auto flex">
                 <Link to={'/'}><img src="/logo.svg" alt="logo" className="w-10 h-10 mr-2" /></Link>
                 <div className="flex-auto ">
-                    <button onClick={reloadAndNavigate} className="normal-case text-xl text-[#009100] font-semibold font-serif" >AI-Farming</button>
+                    <button onClick={reloadAndNavigate} className="normal-case text-xl text-[#009100] font-semibold font-serif" >B-JET</button>
                 </div>
 
                 <div className="flex-none">

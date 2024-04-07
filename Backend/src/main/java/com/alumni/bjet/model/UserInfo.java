@@ -72,7 +72,7 @@ public class UserInfo {
         this.role = role;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

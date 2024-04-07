@@ -1,135 +1,50 @@
-import { React, useEffect, useState, Fragment } from 'react'
+// NotificationMenu.js
+
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import { listNotifications, deleteNotification, statusNotification } from '../actions/notificationActions';
+import { listNotifications, sendNotification, replyToNotification } from '../actions/notificationActions'; // Import listNotifications action
 
+export default function NotificationMenu({ userInfo }) {
+  const dispatch = useDispatch();
+  const [recipientId, setRecipientId] = useState('');
+  const [message, setMessage] = useState('');
+  const [replyMessage, setReplyMessage] = useState('');
 
+  const notificationList = useSelector(state => state.notificationList);
+  const { notifications } = notificationList;
 
+  useEffect(() => {
+    dispatch(listNotifications()); // Use listNotifications action to fetch notifications
+  }, [dispatch]);
 
-export default function NotificationMenu({userInfo}) {
-    // const history = useNavigate();
-    const dispatch = useDispatch();
+  const sendHandler = () => {
+    dispatch(sendNotification(userInfo.id, recipientId, message));
+    setRecipientId('');
+    setMessage('');
+  };
 
-    // __________________User INformations_____________________//
-    // const userLogin = useSelector(state => state.userLogin);
-    // const { userInfo } = userLogin;
+  const replyHandler = (notificationId, senderId) => {
+    dispatch(replyToNotification(notificationId, userInfo.id, replyMessage));
+    setReplyMessage('');
+  };
 
-
-    // __________________Notificaton_____________________//
-
-    const [totalNotifications, setTotalNotifications] = useState(0);
-    const [notificationRedicrectUrl, setNotificationRedicrectUrl] = useState('');
-
-    const notificationList = useSelector(state => state.notificationList);
-    const {  notifications} = notificationList;
-
-    const notificationDelete = useSelector(state => state.notificationDelete);
-    const {  success: notificationDeleteSuccess} = notificationDelete;
-
-    
-    const notificationStatus = useSelector(state => state.notificationStatus);
-    const {  success: notificationStatusSuccess} = notificationStatus;
-
-
-    useEffect(() => {
-        if(userInfo){
-            dispatch(listNotifications())
-        }
-        
-    }, [dispatch, notificationDeleteSuccess, notificationStatusSuccess, userInfo])
-
-    useEffect(() => {
-        if(notifications){
-            var notification_count = 0;
-            notifications.map((notification) => {
-                if(notification.status === false){
-                    notification_count += 1;
-                }
-            })
-            setTotalNotifications(notification_count)
-        }
-        if(notificationStatusSuccess){
-            window.location.href = notificationRedicrectUrl;
-        }
-    }, [notifications, notificationStatusSuccess])
-
-    const deleteHandler = (id) => {
-        dispatch(deleteNotification(id))
-    }
-
-    const linkClickHandler = (notification) => {
-
-        if(notification.type === 'disease'){
-            setNotificationRedicrectUrl(`/disease/${notification.crop}/${notification.disease}`);
-        }
-        else if(notification.type === 'payment'){
-            setNotificationRedicrectUrl(`/profile/`);
-        }
-
-        if(notification.status === false){
-            dispatch(statusNotification(notification.id))
-        }
-        else if(notificationRedicrectUrl !== '' && notificationRedicrectUrl !== undefined && notificationRedicrectUrl !== null){
-            window.location.href = notificationRedicrectUrl;
-        }
-
-    }
-
-    // ________________Notificaton end___________________//
-
-
-    return (
-        <PopupState variant="popover" popupId="demo-popup-menu">
-            {(popupState) => (
-                <Fragment>
-
-                        <label className="btn btn-ghost btn-circle" variant="contained" {...bindTrigger(popupState)}>
-                            <div className="indicator">
-                                <i class="fa-solid fa-bell fa-xl"></i>
-                                <span className="badge badge-sm indicator-item">{totalNotifications}</span>
-                            </div>
-                        </label>
-                    <Menu {...bindMenu(popupState)} 
-                    className=" mt-3 p-2 shadow  rounded-box"
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    >
-                        {notifications && notifications.map((notification) => (
-                            <MenuItem 
-                            onClick={popupState.close} 
-                            style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}
-                            className="mt-3 shadow bg-base-100 rounded-box"
-                            
-                        >
-                            
-                            <div className="text-sm" 
-                            style= {{ whiteSpace: 'normal', wordWrap: 'break-word', maxWidth: '300px'}}
-                            onClick={() => linkClickHandler(notification)}
-                            >
-                                {notification.status === false ? 
-                            <strong >{notification.title}</strong> : <>{notification.title} </>
-                            }
-                            </div>
-                            
-                            <div 
-                            // button aline
-                            class="justify-content-end"
-                            >
-                            <button onClick={() => deleteHandler(notification.id)} className='btn'> <i className='fas fa-trash'></i> </button>
-                            </div>
-                            
-                            
-                        </MenuItem>
-                            
-                            ))}
-                    </Menu>
-
-                </Fragment>
-            )}
-        </PopupState>
-
-
-    );
+  return (
+    <div>
+      <h2>Notifications</h2>
+      <div>
+        <input type="text" placeholder="Recipient ID" value={recipientId} onChange={(e) => setRecipientId(e.target.value)} />
+        <input type="text" placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} />
+        <button onClick={sendHandler}>Send</button>
+      </div>
+      <div>
+        {notifications && notifications.map(notification => (
+          <div key={notification.id}>
+            <p>{notification.message}</p>
+            <input type="text" placeholder="Reply message" value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
+            <button onClick={() => replyHandler(notification.id, notification.senderId)}>Reply</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

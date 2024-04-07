@@ -1,4 +1,4 @@
-package com.javafest.aifarming.model;
+package com.alumni.bjet.model;
 
 import jakarta.persistence.*;
 
@@ -23,33 +23,19 @@ public class NotificationInfo {
     )
     private Long id;
 
-    @Column(name = "title")
-    String title;
+    private Long senderId;
 
-    @Column(name = "notificationType")
-    String notificationType;
+    private Long recipientId;
 
-    @Column(name = "crop")
-    String crop;
-
-    @Column(name = "disease")
-    String disease;
-
-    @Column(name = "status")
-    Boolean status;
-
-    @ManyToOne
-    @JoinColumn(
-            name = "notification_info_id",
-            referencedColumnName = "id",
-            nullable = false,
-            foreignKey = @ForeignKey(
-                    name = "user_notification_foreign_key"
-            )
-    )
-    private UserInfo userInfo;
+    private String message;
 
     public NotificationInfo() {
+    }
+
+    public NotificationInfo(Long senderId, Long recipientId, String message) {
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+        this.message = message;
     }
 
     public Long getId() {
@@ -60,51 +46,27 @@ public class NotificationInfo {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Long getSenderId() {
+        return senderId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setSenderId(Long senderId) {
+        this.senderId = senderId;
     }
 
-    public String getNotificationType() {
-        return notificationType;
+    public Long getRecipientId() {
+        return recipientId;
     }
 
-    public void setNotificationType(String notificationType) {
-        this.notificationType = notificationType;
+    public void setRecipientId(Long recipientId) {
+        this.recipientId = recipientId;
     }
 
-    public String getCrop() {
-        return crop;
+    public String getMessage() {
+        return message;
     }
 
-    public void setCrop(String crop) {
-        this.crop = crop;
-    }
-
-    public String getDisease() {
-        return disease;
-    }
-
-    public void setDisease(String disease) {
-        this.disease = disease;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

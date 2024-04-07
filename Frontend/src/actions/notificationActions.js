@@ -1,97 +1,42 @@
-import axios from "axios";
-import { 
-    NOTIFICATION_LIST_REQUEST,
-    NOTIFICATION_LIST_SUCCESS,
-    NOTIFICATION_LIST_FAILED,
+import axios from 'axios';
 
-    NOTIFICATION_DELETE_REQUEST,
-    NOTIFICATION_DELETE_SUCCESS,
-    NOTIFICATION_DELETE_FAILED,
+export const listNotifications = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get('/api/notification/');
+    dispatch({ type: 'NOTIFICATION_LIST_SUCCESS', payload: data });
+  } catch (error) {
+    dispatch({
+      type: 'NOTIFICATION_LIST_FAILED',
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
 
-    NOTIFICATION_STATUS_REQUEST,
-    NOTIFICATION_STATUS_SUCCESS,
-    NOTIFICATION_STATUS_FAILED
-
-} from "../constants/notificationConstants";
-
-export const listNotifications = () => async (dispatch, getState) => {
-    try {
-        dispatch({
-            type: NOTIFICATION_LIST_REQUEST
-        })
-
-        const { userLogin: { userInfo } } = getState();
-
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
-
-        const { data } = await axios.get(`/api/notification/`, config)
-
-        dispatch({
-            type: NOTIFICATION_LIST_SUCCESS,
-            payload: data
-        })
-    } catch (error) {
-        dispatch({
-            type: NOTIFICATION_LIST_FAILED,
-            payload: error.response.data.message ? error.response.data.message :error.response? error.message : 'error'
-        })
-    }
-}
+export const sendNotification = (senderId, recipientId, message) => async (dispatch) => {
+  try {
+    // Convert senderId to a number
+    // senderId = parseInt(senderId, 10);
+    // recipientId = parseInt(recipientId, 10);
+    
+    await axios.post(`/api/notification/send?senderId=${senderId}&recipientId=${recipientId}&message=${message}`);
+    dispatch(listNotifications());
+  } catch (error) {
+    dispatch({
+      type: 'NOTIFICATION_SEND_FAILED',
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
 
 
-export const deleteNotification = (id) => async (dispatch, getState) => {
-    try {
-        dispatch({
-            type: NOTIFICATION_DELETE_REQUEST
-        })
-
-        const { userLogin: { userInfo } } = getState();
-
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
-
-        const { data } = await axios.delete(`/api/notification/${id}`, config)
-
-        dispatch({
-            type: NOTIFICATION_DELETE_SUCCESS,
-        })
-    } catch (error) {
-        dispatch({
-            type: NOTIFICATION_DELETE_FAILED,
-            payload: error.response.data.message ? error.response.data.message :error.response? error.message : 'error'
-        })
-    }
-}
-
-
-export const statusNotification = (id) => async (dispatch, getState) => {
-    try {
-        dispatch({
-            type: NOTIFICATION_STATUS_REQUEST
-        })
-
-        const { userLogin: { userInfo } } = getState();
-
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
-        const { data } = await axios.get(`/api/notification/${id}`, config)
-        dispatch({
-            type: NOTIFICATION_STATUS_SUCCESS,
-        })
-    } catch (error) {
-        dispatch({
-            type: NOTIFICATION_STATUS_FAILED,
-            payload: error.response.data.message ? error.response.data.message :error.response? error.message : 'error'
-        })
-    }
-}
+export const replyToNotification = (notificationId, senderId, replyMessage) => async (dispatch) => {
+  try {
+    await axios.post(`/api/notification/${notificationId}/reply`, { senderId, replyMessage });
+    dispatch(listNotifications());
+  } catch (error) {
+    dispatch({
+      type: 'NOTIFICATION_REPLY_FAILED',
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
