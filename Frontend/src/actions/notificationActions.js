@@ -1,8 +1,10 @@
+// notificationActions.js
+
 import axios from 'axios';
 
-export const listNotifications = () => async (dispatch) => {
+export const listNotifications = (username) => async (dispatch) => {
   try {
-    const { data } = await axios.get('/api/notification/');
+    const { data } = await axios.get(`/api/notification/${username}`);
     dispatch({ type: 'NOTIFICATION_LIST_SUCCESS', payload: data });
   } catch (error) {
     dispatch({
