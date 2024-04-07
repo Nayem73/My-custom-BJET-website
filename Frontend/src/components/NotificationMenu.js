@@ -6,7 +6,7 @@ import { listNotifications, sendNotification, replyToNotification } from '../act
 
 export default function NotificationMenu({ userInfo }) {
   const dispatch = useDispatch();
-  const [recipientId, setRecipientId] = useState('');
+  const [recipientUsername, setRecipientUsername] = useState('');
   const [message, setMessage] = useState('');
   const [replyMessage, setReplyMessage] = useState('');
 
@@ -18,21 +18,21 @@ export default function NotificationMenu({ userInfo }) {
   }, [dispatch]);
 
   const sendHandler = () => {
-    dispatch(sendNotification(userInfo.id, recipientId, message));
-    setRecipientId('');
-    setMessage('');
+    dispatch(sendNotification(userInfo.username, recipientUsername, message));
+    setRecipientUsername(''); // Clear recipient username after sending
+    setMessage(''); // Clear message after sending
   };
 
-  const replyHandler = (notificationId, senderId) => {
-    dispatch(replyToNotification(notificationId, userInfo.id, replyMessage));
-    setReplyMessage('');
+  const replyHandler = (notificationId) => {
+    dispatch(replyToNotification(notificationId, userInfo.username, replyMessage));
+    setReplyMessage(''); // Clear reply message after sending
   };
 
   return (
     <div>
       <h2>Notifications</h2>
       <div>
-        <input type="text" placeholder="Recipient ID" value={recipientId} onChange={(e) => setRecipientId(e.target.value)} />
+        <input type="text" placeholder="Recipient Username" value={recipientUsername} onChange={(e) => setRecipientUsername(e.target.value)} />
         <input type="text" placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} />
         <button onClick={sendHandler}>Send</button>
       </div>
@@ -41,7 +41,7 @@ export default function NotificationMenu({ userInfo }) {
           <div key={notification.id}>
             <p>{notification.message}</p>
             <input type="text" placeholder="Reply message" value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
-            <button onClick={() => replyHandler(notification.id, notification.senderId)}>Reply</button>
+            <button onClick={() => replyHandler(notification.id)}>Reply</button>
           </div>
         ))}
       </div>

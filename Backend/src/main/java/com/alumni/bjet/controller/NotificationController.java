@@ -29,13 +29,10 @@ public class NotificationController {
 
     @PostMapping("/send")
     public ResponseEntity<?> sendNotification(
-            @RequestParam String senderId,
-            @RequestParam String recipientId,
+            @RequestParam String senderUsername,
+            @RequestParam String recipientUsername,
             @RequestParam String message) {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+ senderId);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+recipientId);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+message);
-        return notificationService.sendNotification(Long.parseLong(senderId), Long.parseLong(recipientId), message);
+        return notificationService.sendNotification(senderUsername, recipientUsername, message);
     }
 
     @PostMapping("/{notificationId}/reply")

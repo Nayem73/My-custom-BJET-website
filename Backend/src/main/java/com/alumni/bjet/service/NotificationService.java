@@ -27,14 +27,30 @@ public class NotificationService {
         return ResponseEntity.ok().body(notifications);
     }
 
-    public ResponseEntity<?> sendNotification(Long senderId, Long recipientId, String message) {
+    // NotificationService.java
+
+    public ResponseEntity<?> sendNotification(String senderUsername, String recipientUsername, String message) {
+        // Get UserInfo entities corresponding to sender and recipient usernames
+        UserInfo senderInfo = userInfoRepository.getByUserName(senderUsername);
+        UserInfo recipientInfo = userInfoRepository.getByUserName(recipientUsername);
+
+        // Check if sender and recipient exist
+        if (senderInfo == null || recipientInfo == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sender or recipient not found.");
+        }
+
+        // Create NotificationInfo object and set senderId, recipientId, and message
         NotificationInfo notification = new NotificationInfo();
-        notification.setSenderId(senderId);
-        notification.setRecipientId(recipientId);
+        notification.setSenderId(senderInfo.getId());
+        notification.setRecipientId(recipientInfo.getId());
         notification.setMessage(message);
+
+        // Save notification
         notificationRepository.save(notification);
+
         return ResponseEntity.status(HttpStatus.CREATED).body("Notification sent successfully.");
     }
+
 
     public ResponseEntity<?> replyToNotification(Long notificationId, Long senderId, String replyMessage) {
         NotificationInfo notification = notificationRepository.findById(notificationId)

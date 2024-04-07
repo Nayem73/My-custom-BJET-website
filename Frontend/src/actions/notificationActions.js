@@ -12,13 +12,9 @@ export const listNotifications = () => async (dispatch) => {
   }
 };
 
-export const sendNotification = (senderId, recipientId, message) => async (dispatch) => {
+export const sendNotification = (senderUsername, recipientUsername, message) => async (dispatch) => {
   try {
-    // Convert senderId to a number
-    // senderId = parseInt(senderId, 10);
-    // recipientId = parseInt(recipientId, 10);
-    
-    await axios.post(`/api/notification/send?senderId=${senderId}&recipientId=${recipientId}&message=${message}`);
+    await axios.post(`/api/notification/send?senderUsername=${senderUsername}&recipientUsername=${recipientUsername}&message=${message}`);
     dispatch(listNotifications());
   } catch (error) {
     dispatch({
