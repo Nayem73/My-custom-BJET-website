@@ -13,6 +13,7 @@ import { listDiseases } from '../actions/diseaseActions';
 
 
 import NotificationMenu from '../components/NotificationMenu';
+import MessageNotification from '../components/MessageNotification';
 
 
 function Header() {
@@ -89,7 +90,7 @@ function Header() {
 
                 <div className="flex-none">
                     {/* notification */}
-                    <NotificationMenu userInfo={userInfo} />
+                    {/* <MessageNotification userInfo={userInfo} /> */}
                     {/* notification end */}
 
 
