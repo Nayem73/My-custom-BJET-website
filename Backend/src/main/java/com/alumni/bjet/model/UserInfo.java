@@ -1,7 +1,11 @@
 package com.alumni.bjet.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -52,24 +56,50 @@ public class UserInfo {
             columnDefinition = "TEXT"
     )
     private String role;
+    @Column(name = "profilePicture")
+    private String profilePicture;
 
+    @Column(name = "bjetBatch")
+    private String bjetBatch;
+    @Column(name = "about")
+    private String about;
 
-    @OneToMany(
-            mappedBy = "userInfo",
-            orphanRemoval = true,
-            cascade = CascadeType.ALL
-    )
-    private List<UserReview> userReviews;
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "company")
+    private String company;
+
+    @Column(name = "position")
+    private String position;
+
+    @ElementCollection
+    @CollectionTable(name = "technology_stack", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "technology")
+    private List<String> technologyStack = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(name = "social_media", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "value")
+    @MapKeyColumn(name = "platform")
+    private Map<String, String> social = new HashMap<>();
 
 
     public UserInfo() {
+        this.profilePicture = "/api/picture?link=static/avatar.png";
     }
-    public UserInfo(int id, String userName, String email, String password, String role) {
-        this.id = id;
+
+    public UserInfo(String userName, String email, String password, String role, String bjetBatch, String about, String address, String company, String position) {
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.bjetBatch = bjetBatch;
+        this.about = about;
+        this.address = address;
+        this.company = company;
+        this.position = position;
+        this.profilePicture = "/api/picture?link=static/avatar.png";
     }
 
     public long getId() {
@@ -112,4 +142,67 @@ public class UserInfo {
         this.role = role;
     }
 
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public List<String> getTechnologyStack() {
+        return technologyStack;
+    }
+
+    public void setTechnologyStack(String currentTechnology) {
+        technologyStack.add(currentTechnology);
+    }
+
+    public Map<String, String> getSocial() {
+        return social;
+    }
+
+    public void setSocial(String platform, String handle) {
+        social.put(platform, handle);
+    }
+
+    public String getBjetBatch() {
+        return bjetBatch;
+    }
+
+    public void setBjetBatch(String bjetBatch) {
+        this.bjetBatch = bjetBatch;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 }

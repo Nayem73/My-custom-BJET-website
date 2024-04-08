@@ -220,8 +220,23 @@ public class UserInfoController {
         response.put("id", userInfo.getId());
         response.put("userName", userInfo.getUserName());
         response.put("email", userInfo.getEmail());
+        response.put("Profile Picture", userInfo.getProfilePicture());
+        response.put("B-JET Batch", userInfo.getBjetBatch());
+        response.put("About", userInfo.getAbout());
+        response.put("Current Address", userInfo.getAddress());
+        response.put("Current Company", userInfo.getCompany());
+        response.put("Current Position", userInfo.getPosition());
+        response.put("Technology Stack", userInfo.getTechnologyStack());
+        response.put("Social Media", userInfo.getSocial());
+
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/alumni/")
+    public ResponseEntity<?> getAlumni() {
+        List<UserInfo> bjetAlumni = userInfoRepository.findByRole("ROLE_BJET");
+        return ResponseEntity.ok(bjetAlumni);
     }
 
 
@@ -260,7 +275,7 @@ public class UserInfoController {
     @PatchMapping("/userlist/{id}")
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     public ResponseEntity<Map<String, Object>> userUpdate(
-            @PathVariable Long id,
+            @PathVariable Integer id,
             @RequestParam(value="isAdmin") Boolean isAdmin) {
 
         UserInfo userInfo = userInfoRepository.findById(id);
