@@ -10,6 +10,7 @@ import ReviewScreen from './screens/ReviewScreen';
 import Header from './components/Header';
 import Home from './components/pages/Home';
 import Alumni from './components/Alumni';
+import UserProfile from './components/UserProfile';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/register' element={<RegisterScreen />} />
           <Route path='/review' element={<ReviewScreen />} />
           <Route path='/alumni' element={<Alumni />} />
+          <Route path='/users/:id' element={<UserProfile />} />
         </Routes>
     </>
   );  

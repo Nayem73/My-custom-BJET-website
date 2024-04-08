@@ -238,7 +238,28 @@ public class UserInfoController {
         List<UserInfo> bjetAlumni = userInfoRepository.findByRole("ROLE_BJET");
         return ResponseEntity.ok(bjetAlumni);
     }
-
+    @GetMapping("/users/{id}")
+    public ResponseEntity<?> getNotifications(@PathVariable Integer id) {
+        if (id == null) {
+            return new ResponseEntity<>("User id is not provided as PathVariable", HttpStatus.UNAUTHORIZED);
+        }
+        UserInfo userInfo =  userInfoRepository.findById(id);
+        Map<String, Object> response = new LinkedHashMap<>();
+        if (userInfo.getRole().equals("ROLE_BJET")) response.put("profile", "B-JET Graduate");
+        response.put("profilePicture", userInfo.getProfilePicture());
+        response.put("userName", userInfo.getUserName());
+        response.put("email", userInfo.getEmail());
+        response.put("about", userInfo.getAbout());
+        if (userInfo.getRole().equals("ROLE_BJET")) {
+            response.put("B-JET Batch", userInfo.getBjetBatch());
+            response.put("address", userInfo.getAddress());
+            response.put("company", userInfo.getCompany());
+            response.put("position", userInfo.getPosition());
+            response.put("technologyStack", userInfo.getTechnologyStack());
+            response.put("social", userInfo.getSocial());
+        }
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping("/userlist/")
     @PreAuthorize("hasAuthority('ROLE_ADMIN') OR hasAuthority('ROLE_SUPER_ADMIN')")
