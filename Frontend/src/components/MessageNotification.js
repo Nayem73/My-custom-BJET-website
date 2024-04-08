@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { listNotifications } from '../actions/messageActions';
 import { Chat } from 'react-bootstrap-icons'; // Import Chat icon from react-bootstrap-icons
+import './MessageNotification.css'; // Import the CSS file
 
 export default function MessageNotification({ userInfo }) {
   if (!userInfo) {
@@ -37,7 +38,7 @@ export default function MessageNotification({ userInfo }) {
   return (
     <div>
       <h2>
-        <Chat onClick={toggleNotifications} style={{ cursor: 'pointer' }} /> {/* Chat icon to toggle notifications */}
+        <Chat onClick={toggleNotifications} style={{ cursor: 'pointer', fontSize: '1.5rem' }} /> {/* Adjust the size of the Chat icon */}
         {notificationCount > 0 && <span className="notification-count">{notificationCount}</span>} {/* Display notification count */}
       </h2>
       {showNotifications && notifications && (
