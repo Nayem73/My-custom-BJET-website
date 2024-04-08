@@ -32,8 +32,8 @@ function Header() {
                 <Link to={'/'} className='header-link'>Home</Link>
                 <Link to={'/resources'} className='header-link'>Resources</Link>
                 <Link to={'/break-the-barrier'} className='header-link'>Break the Barrier</Link>
-                <Link to={'/bjet-alumni'} className='header-link'>B-JET Alumni</Link>
-                <Link to={'/community'} className='header-link'>Community</Link>
+                <Link to={'/alumni'} className='header-link'>B-JET Alumni</Link>
+                <Link to={'/review'} className='header-link'>Community</Link>
                 {userInfo ? (
                     <>
                         <MessageNotification userInfo={userInfo} />
