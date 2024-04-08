@@ -56,3 +56,15 @@
         flex-direction: column;
     }
 }
+
+.header-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #555;
+    padding: 1em;
+    margin-top: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    z-index: 999;
+    /* Add this line */
+}
