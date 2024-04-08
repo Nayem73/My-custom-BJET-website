@@ -9,6 +9,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import ReviewScreen from './screens/ReviewScreen';
 import Header from './components/Header';
 import Home from './components/pages/Home';
+import Alumni from './components/Alumni';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/login' element={<LoginScreen />} />
           <Route path='/register' element={<RegisterScreen />} />
           <Route path='/review' element={<ReviewScreen />} />
+          <Route path='/alumni' element={<Alumni />} />
         </Routes>
     </>
   );  

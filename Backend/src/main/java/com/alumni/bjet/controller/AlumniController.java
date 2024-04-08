@@ -1,2 +1,4 @@
-package com.alumni.bjet.controller;public class AlumniController {
+package com.alumni.bjet.controller;
+
+public class AlumniController {
 }
