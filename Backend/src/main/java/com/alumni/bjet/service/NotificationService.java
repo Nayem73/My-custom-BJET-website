@@ -23,6 +23,9 @@ public class NotificationService {
 
     public ResponseEntity<?> getNotificationsForUser(String userName) {
         UserInfo userInfo = userInfoRepository.getByUserName(userName);
+        if (userInfo == null) {
+            return new ResponseEntity<>("User is not authenticated", HttpStatus.UNAUTHORIZED);
+        }
         List<NotificationInfo> notifications = notificationRepository.findByRecipientId(userInfo.getId());
         return ResponseEntity.ok().body(notifications);
     }

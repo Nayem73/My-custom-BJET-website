@@ -28,9 +28,10 @@ public class NotificationController {
     }
     @GetMapping("/{username}")
     public ResponseEntity<?> getNotifications(@PathVariable String username) {
-        if (username == null || username.isEmpty()) {
+        if (username == null || username.equals("undefined") || username.isEmpty()) {
             return new ResponseEntity<>("User is not authenticated", HttpStatus.UNAUTHORIZED);
         }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ USERNAME: "+ username);
         return notificationService.getNotificationsForUser(username);
     }
 
