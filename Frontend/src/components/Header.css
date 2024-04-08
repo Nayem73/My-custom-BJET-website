@@ -1,54 +1,58 @@
-/* Header.css */
-
-.navbar {
-    background-color: var(--navbar-bg-color);
-    /* Use CSS variable for background color */
-    padding: 1rem 2rem;
+.header-container {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    background-color: #333;
+    border-bottom: 1px solid #ddd;
 }
 
-.navbar img {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-right: 1rem;
+.header-nav {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
 }
 
-.navbar button {
-    color: var(--button-text-color);
-    font-size: 1.6rem;
-    font-weight: bold;
+.header-logo img {
+    width: 90px;
+    height: 50px;
 }
 
-.search-box {
-    margin-left: 1rem;
+.header-link,
+.header-button {
+    color: white;
+    text-decoration: none;
 }
 
-.dropdown.dropdown-end {
+.header-dropdown {
     position: relative;
 }
 
-.dropdown.dropdown-end .btn.btn-ghost.btn-circle {
-    padding: 0.5rem;
-}
-
-.menu.menu-compact.dropdown-content {
+.header-dropdown-content {
+    display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-    padding: 0.5rem 0;
+    background-color: #555;
+    padding: 1em;
+    margin-top: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.menu.menu-compact.dropdown-content li {
-    padding: 0.5rem 1rem;
+.header-dropdown:hover .header-dropdown-content {
+    display: block;
 }
 
-.menu.menu-compact.dropdown-content li a {
-    color: #333;
+.header-dropdown-link {
+    display: block;
+    color: white;
+    text-decoration: none;
 }
 
-.menu.menu-compact.dropdown-content li:hover {
-    background-color: #f0f0f0;
+@media screen and (max-width: 768px) {
+    .header-nav {
+        flex-direction: column;
+    }
 }
