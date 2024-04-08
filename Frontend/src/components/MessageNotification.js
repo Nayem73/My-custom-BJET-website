@@ -36,18 +36,18 @@ export default function MessageNotification({ userInfo }) {
   };
 
   return (
-    <div>
-      <h2>
-        <Chat onClick={toggleNotifications} style={{ cursor: 'pointer', fontSize: '1.5rem' }} /> {/* Adjust the size of the Chat icon */}
-        {notificationCount > 0 && <span className="notification-count">{notificationCount}</span>} {/* Display notification count */}
-      </h2>
-      {showNotifications && notifications && (
-        <div>
-          {notifications.map((notification) => (
-            <p key={notification.id}>{notification.message}</p> // Display each notification message
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  <div className="message-notification-container"> {/* Apply the class to the container */}
+    <h2>
+      <Chat onClick={toggleNotifications} style={{ cursor: 'pointer', fontSize: '1.5rem', color: 'white' }} /> {/* Adjust the size of the Chat icon */}
+      {notificationCount > 0 && <span className="notification-count">{notificationCount}</span>} {/* Display notification count */}
+    </h2>
+    {showNotifications && notifications && (
+      <div>
+        {notifications.map((notification) => (
+          <p key={notification.id}>{notification.message}</p> // Display each notification message
+        ))}
+      </div>
+    )}
+  </div>
+);
 }
