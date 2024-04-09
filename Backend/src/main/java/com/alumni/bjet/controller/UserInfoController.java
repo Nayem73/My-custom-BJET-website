@@ -327,4 +327,17 @@ public class UserInfoController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/username/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        Optional<UserInfo> userInfoOptional = userInfoRepository.findByUserName(username);
+
+        if (userInfoOptional.isPresent()) {
+            UserInfo userInfo = userInfoOptional.get();
+            return ResponseEntity.ok(userInfo);
+        } else {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "User not found for username: " + username);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
 }

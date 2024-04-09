@@ -21,5 +21,6 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
 
     UserInfo findById(int id);
     List<UserInfo> findByRole(String role);
+
 //    Page<UserInfo> findAll(Pageable pageable);
 }
