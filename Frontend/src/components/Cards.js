@@ -1,8 +1,11 @@
 import React from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
+import NewImage from '../images/220804v6.jpg';
 
 function Cards() {
+  const linkToPDF = 'https://www.miyazaki-u.ac.jp/kokusai/news-events/mediafile/220804v6.pdf';
+
   return (
     <div className='cards'>
       <h1>At B-JET</h1>
@@ -12,6 +15,11 @@ function Cards() {
        <div className='cards__buttons'>
         <button>Background & Achievements</button>
         <button>Program Contents</button>
+      </div>
+      <div className='cards__image-link'>
+        <a href={linkToPDF} target="_blank" rel="noopener noreferrer">
+          <img src={NewImage} alt="220804v6" />
+        </a>
       </div>
       <div className='cards__container'>
         <div className='cards__wrapper'>
