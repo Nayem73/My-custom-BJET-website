@@ -25,3 +25,15 @@ export const sendNotification = (senderUsername, recipientUsername, message) => 
     });
   }
 };
+
+export const fetchUser = (username) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`/api/username/${username}`);
+    dispatch({ type: 'USER_FETCH_SUCCESS', payload: data });
+  } catch (error) {
+    dispatch({
+      type: 'USER_FETCH_FAILED',
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};

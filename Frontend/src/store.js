@@ -58,9 +58,10 @@ import {
     notificationStatusReducer
     } from './reducers/notificationReducers';
 
-
+import userReducer from './reducers/userReducer';
 
 const reducer = combineReducers({
+    userFetch: userReducer,
     cropList : cropListReducer,
     cropDelete: cropDeleteReducer,
     cropCreate: cropCreateReducer,

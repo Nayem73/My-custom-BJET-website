@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { listNotifications } from '../actions/messageActions';
+import { listNotifications, fetchUser } from '../actions/messageActions';
 import { Chat } from 'react-bootstrap-icons'; // Import Chat icon from react-bootstrap-icons
 import './MessageNotification.css'; // Import the CSS file
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,13 @@ export default function MessageNotification({ userInfo }) {
   const notificationList = useSelector(state => state.notificationList);
   const { notifications } = notificationList;
 
+  const userFetch = useSelector(state => state.userFetch);
+  const { user } = userFetch;
+
   useEffect(() => {
+    if (userInfo) {
+      dispatch(fetchUser(userInfo.username)); // Dispatch fetchUser action
+    }
     dispatch(listNotifications(userInfo.username));
   }, [dispatch, userInfo.username]);
 
@@ -30,7 +36,7 @@ export default function MessageNotification({ userInfo }) {
     <div className="message-notification-container" onMouseEnter={() => setShowNotifications(true)} onMouseLeave={() => setShowNotifications(false)}>
       <h2>
         <Chat style={{ cursor: 'pointer', fontSize: '1.5rem', color: 'white' }} />
-        {userInfo.notificationCount > 0 && <span className="notification-count">{userInfo.notificationCount}</span>}
+        {user?.notificationCount > 0 && <span className="notification-count">{user.notificationCount}</span>}
       </h2>
       {showNotifications && notifications && (
         <div className="notification-dropdown">
