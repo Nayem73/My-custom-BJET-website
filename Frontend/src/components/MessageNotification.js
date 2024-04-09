@@ -22,20 +22,22 @@ export default function MessageNotification({ userInfo }) {
   const { user } = userFetch;
 
   useEffect(() => {
-    if (userInfo) {
-      // Fetch user data immediately
-      dispatch(fetchUser(userInfo.username));
-
-      // Set up polling: fetch user data every 5 seconds
-      const intervalId = setInterval(() => {
-        dispatch(fetchUser(userInfo.username));
-      }, 5000);
-
-      // Clean up: clear the interval when the component unmounts
-      return () => clearInterval(intervalId);
-    }
+  if (userInfo) {
+    // Fetch user data immediately
+    dispatch(fetchUser(userInfo.username));
     dispatch(listNotifications(userInfo.username));
-  }, [dispatch, userInfo.username]);
+
+    // Set up polling: fetch user data and notifications list every 5 seconds
+    const intervalId = setInterval(() => {
+      dispatch(fetchUser(userInfo.username));
+      dispatch(listNotifications(userInfo.username));
+    }, 5000);
+
+    // Clean up: clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }
+}, [dispatch, userInfo.username]);
+
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications); // Toggle the display of notifications
