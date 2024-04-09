@@ -45,6 +45,7 @@ public class NotificationService {
         // Create NotificationInfo object and set senderId, recipientId, and message
         NotificationInfo notification = new NotificationInfo();
         notification.setSenderId(senderInfo.getId());
+        notification.setSenderUsername(senderInfo.getUserName());
         notification.setRecipientId(recipientInfo.getId());
         notification.setMessage(message);
 

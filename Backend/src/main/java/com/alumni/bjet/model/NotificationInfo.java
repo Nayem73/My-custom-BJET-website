@@ -24,6 +24,7 @@ public class NotificationInfo {
     private Long id;
 
     private Long senderId;
+    private String senderUsername;
 
     private Long recipientId;
 
@@ -32,8 +33,9 @@ public class NotificationInfo {
     public NotificationInfo() {
     }
 
-    public NotificationInfo(Long senderId, Long recipientId, String message) {
+    public NotificationInfo(Long senderId, String senderUsername, Long recipientId, String message) {
         this.senderId = senderId;
+        this.senderUsername = senderUsername;
         this.recipientId = recipientId;
         this.message = message;
     }
@@ -52,6 +54,14 @@ public class NotificationInfo {
 
     public void setSenderId(Long senderId) {
         this.senderId = senderId;
+    }
+
+    public String getSenderUsername() {
+        return senderUsername;
+    }
+
+    public void setSenderUsername(String senderUsername) {
+        this.senderUsername = senderUsername;
     }
 
     public Long getRecipientId() {
