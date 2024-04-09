@@ -11,6 +11,7 @@ import Header from './components/Header';
 import Home from './components/pages/Home';
 import Alumni from './components/Alumni';
 import UserProfile from './components/UserProfile';
+import AboutUs from './components/AboutUs';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/review' element={<ReviewScreen />} />
           <Route path='/alumni' element={<Alumni />} />
           <Route path='/users/:id' element={<UserProfile />} />
+          <Route path='/aboutus' element={<AboutUs />} />
         </Routes>
     </>
   );  
