@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../actions/userActions';
-import { listCrops } from '../actions/cropActions';
 import MessageNotification from '../components/MessageNotification';
 import './Header.css';
+import { FaBars } from 'react-icons/fa';
 
 function Header() {
     const history = useNavigate();
@@ -13,6 +13,31 @@ function Header() {
     // User Information
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
+
+    // User ID state
+    const [userId, setUserId] = useState(null);
+
+    useEffect(() => {
+        const fetchUserId = async () => {
+            try {
+                const response = await fetch(`/api/username/${userInfo.username}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('User data', data);
+                    setUserId(data.id);
+                } else {
+                    // Handle error
+                    console.error('Error fetching user ID:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching user ID:', error);
+            }
+        };
+
+        if (userInfo) {
+            fetchUserId();
+        }
+    }, [userInfo]);
 
     // Log out handler
     const logOutHandler = () => {
@@ -38,10 +63,11 @@ function Header() {
                     <>
                         <MessageNotification userInfo={userInfo} />
                         <div className='header-dropdown'>
-                            <button onClick={() => setDropdownOpen(!dropdownOpen)} className='header-button'>Menu</button>
+                            <button onClick={() => setDropdownOpen(!dropdownOpen)} className='header-button'> <FaBars /> </button>
+
                             {dropdownOpen && (
                                 <div className='header-dropdown-content'>
-                                    <Link to={'/profile'} className='header-dropdown-link'>Profile</Link>
+                                    <Link to={`/users/${userId}`} className='header-dropdown-link'>Profile</Link>
                                     <Link to={'/review'} className='header-dropdown-link'>Review</Link>
                                     {userInfo.isAdmin && (
                                         <>
