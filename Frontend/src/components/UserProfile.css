@@ -4,14 +4,27 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    text-align: center;
+    /* Center the profile card */
 }
 
 .user-profile h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
 .user-profile p {
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.user-profile-picture {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 0 auto;
+    /* Center horizontally */
+    display: block;
+    /* Ensure proper centering */
 }

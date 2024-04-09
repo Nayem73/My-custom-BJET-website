@@ -1,17 +1,19 @@
+// UserProfile.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UserProfile.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux'; // Removed unnecessary imports
 import { useNavigate, useParams } from 'react-router-dom';
-import NotificationMenu from './NotificationMenu'; // Import NotificationMenu component
+import NotificationMenu from './NotificationMenu';
 
 function UserProfile() {
   const [user, setUser] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
-    // __________________User INformations_____________________//
-    const userLogin = useSelector(state => state.userLogin);
-    const { userInfo } = userLogin;
+
+  // User Information
+  const userLogin = useSelector(state => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     axios.get(`/api/users/${id}`)
@@ -40,7 +42,7 @@ function UserProfile() {
         <p>Company: {user.company}</p>
         <p>Position: {user.position}</p>
       </div>
-        <NotificationMenu userInfo={userInfo} /> {/* Pass userInfo prop to NotificationMenu */}
+      <NotificationMenu userInfo={userInfo} />
     </div>
   );
 }

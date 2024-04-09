@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { listNotifications, sendNotification } from '../actions/notificationActions';
-import { Bell } from 'react-bootstrap-icons'; // Import Bell icon from react-bootstrap-icons
+import { Chat } from 'react-bootstrap-icons'; // Import Chat icon from react-bootstrap-icons
 
 export default function NotificationMenu({ userInfo }) {
   if (!userInfo) {
@@ -40,10 +40,10 @@ useEffect(() => {
 
   return (
     <div>
-      <h2>
-        Notifications
-        <Bell onClick={toggleNotifications} style={{ cursor: 'pointer' }} /> {/* Bell icon to toggle notifications */}
-      </h2>
+      <h3 style={{ display: 'flex', alignItems: 'center' }}>
+        <Chat style={{ cursor: 'default', marginRight: '10px' }} /> Send a Message
+      </h3>
+
       {showNotifications && notifications && (
         <div>
           {notifications.map((notification) => (
