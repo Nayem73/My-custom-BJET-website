@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { listNotifications, sendNotification } from '../actions/notificationActions';
 import { Chat } from 'react-bootstrap-icons';
 
-export default function NotificationMenu({ userInfo }) {
+export default function NotificationMenu({ userInfo, user }) {
   if (!userInfo) {
     return null; // Return null or a fallback UI if userInfo is null
   }
   const dispatch = useDispatch();
-  const [recipientUsername, setRecipientUsername] = useState(userInfo.userName || '');
+  const [recipientUsername, setRecipientUsername] = useState(user.userName || '');
   const [message, setMessage] = useState('');
   const [showNotifications, setShowNotifications] = useState(false);
 
