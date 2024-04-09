@@ -42,7 +42,7 @@ function UserProfile() {
         <p>Company: {user.company}</p>
         <p>Position: {user.position}</p>
       </div>
-      <NotificationMenu userInfo={userInfo} />
+      <NotificationMenu userInfo={user} />
     </div>
   );
 }

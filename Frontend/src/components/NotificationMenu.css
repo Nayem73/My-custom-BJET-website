@@ -1,0 +1,85 @@
+/* NotificationMenu.css */
+.notification-menu {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #f9f9f9;
+    /* Set a light gray background */
+}
+
+.notification-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.chat-icon {
+    font-size: 24px;
+    color: #007bff;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.notification-list {
+    margin-bottom: 20px;
+}
+
+.notification-message {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.notification-inputs {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    /* Add scrollbar if the content overflows */
+}
+
+textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    resize: both;
+    /* Allow resizing both vertically and horizontally */
+    overflow: auto;
+    /* Show scrollbars if the content overflows */
+}
+
+input[type='text'] {
+    padding: 10px;
+    /* Adjust padding for input fields */
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.send-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    /* Adjust padding for the button */
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.message-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: both;
+    overflow: auto;
+    white-space: pre-wrap;
+    /* or pre-line */
+    /* Add any other custom styles you'd like */
+}
