@@ -23,7 +23,16 @@ export default function MessageNotification({ userInfo }) {
 
   useEffect(() => {
     if (userInfo) {
-      dispatch(fetchUser(userInfo.username)); // Dispatch fetchUser action
+      // Fetch user data immediately
+      dispatch(fetchUser(userInfo.username));
+
+      // Set up polling: fetch user data every 5 seconds
+      const intervalId = setInterval(() => {
+        dispatch(fetchUser(userInfo.username));
+      }, 5000);
+
+      // Clean up: clear the interval when the component unmounts
+      return () => clearInterval(intervalId);
     }
     dispatch(listNotifications(userInfo.username));
   }, [dispatch, userInfo.username]);
