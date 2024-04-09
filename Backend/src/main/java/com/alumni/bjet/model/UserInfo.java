@@ -73,6 +73,10 @@ public class UserInfo {
     @Column(name = "position")
     private String position;
 
+    @Column(name = "notificationCount")
+    private Long notificationCount;
+
+
     @ElementCollection
     @CollectionTable(name = "technology_stack", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "technology")
@@ -87,6 +91,7 @@ public class UserInfo {
 
     public UserInfo() {
         this.profilePicture = "/api/picture?link=static/avatar.png";
+        this.notificationCount = 0L;
     }
 
     public UserInfo(String userName, String email, String password, String role, String bjetBatch, String about, String address, String company, String position) {
@@ -100,6 +105,7 @@ public class UserInfo {
         this.company = company;
         this.position = position;
         this.profilePicture = "/api/picture?link=static/avatar.png";
+        this.notificationCount = 0L;
     }
 
     public long getId() {
@@ -204,5 +210,13 @@ public class UserInfo {
 
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public Long getNotificationCount() {
+        return notificationCount;
+    }
+
+    public void setNotificationCount(Long notificationCount) {
+        this.notificationCount = notificationCount;
     }
 }

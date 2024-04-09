@@ -43,4 +43,12 @@ public class NotificationController {
             @RequestParam String message) {
         return notificationService.sendNotification(senderUsername, recipientUsername, message);
     }
+
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteNotification(
+            @RequestParam Long notificationId,
+            @RequestParam String username) {
+        return notificationService.deleteNotification(notificationId, username);
+    }
+
 }

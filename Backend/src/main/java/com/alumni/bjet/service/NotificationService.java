@@ -48,10 +48,33 @@ public class NotificationService {
         notification.setSenderUsername(senderInfo.getUserName());
         notification.setRecipientId(recipientInfo.getId());
         notification.setMessage(message);
+        recipientInfo.setNotificationCount(recipientInfo.getNotificationCount() + 1L);
 
         // Save notification
         notificationRepository.save(notification);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Notification sent successfully.");
     }
+
+    public ResponseEntity<?> deleteNotification(Long notificationId, String username) {
+        // Check if notification exists
+        if (!notificationRepository.existsById(notificationId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notification not found.");
+        }
+        UserInfo userInfo = userInfoRepository.getByUserName(username);
+
+        // Check if sender and recipient exist
+        if (userInfo == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user not found.");
+        }
+
+        // Reduce user's notification count by 1
+        userInfo.setNotificationCount(userInfo.getNotificationCount() - 1L);
+
+        // Delete the notification by its ID
+        notificationRepository.deleteById(notificationId);
+
+        return ResponseEntity.ok().body("Notification deleted successfully.");
+    }
+
 }
