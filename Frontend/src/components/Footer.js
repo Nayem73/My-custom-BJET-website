@@ -1,6 +1,5 @@
 import React from 'react';
 import './Footer.css';
-import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import Footer1 from '../images/Footer1.webp';
 import Footer2 from '../images/Footer2.webp';
@@ -17,7 +16,7 @@ function Footer() {
           Join B-JET to work as an ICT Engineer in Japan!
         </p>
         <p className='footer-subscription-text'>
-          You can unsubscribe for newsletters at any time.
+          Subscribe for our newsletters now!
         </p>
         <div className='input-areas'>
           <form>
@@ -27,7 +26,7 @@ function Footer() {
               type='email'
               placeholder='Your Email'
             />
-            <Button buttonStyle='btn--outline'>Subscribe</Button>
+            <button type="submit" className="subscribe-btn">Subscribe</button>
           </form>
         </div>
       </section>

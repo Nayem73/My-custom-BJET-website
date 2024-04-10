@@ -13,13 +13,13 @@ function Cards() {
       <p style={{ textAlign: 'center', fontSize: '1.2rem', fontWeight: 'bold' }}>
         Under the mission of "creating people and organizations that challenge the social issues and possibilities of Bangladesh and Miyazaki," we aim to acquire the minimum Japanese language skills necessary for ICT human resources in Bangladesh to work in the ICT market in Japan, as well as the knowledge necessary for living and working in Japan in 20 weeks (400 credit hours).
       </p>
-       <div className='cards__buttons'>
-          <Link to="/aboutus">
-            <button>Background & Achievements</button>
-          </Link>
-          <Link to="/program-contents">
-            <button>Program Contents</button>
-          </Link>
+        <div className='cards__buttons'>
+        <Link to="/aboutus">
+          <button className="styled-btn">Background & Achievements</button>
+        </Link>
+        <Link to="/program-contents">
+          <button className="styled-btn">Program Contents</button>
+        </Link>
         </div>
       <div className='cards__image-link'>
         <a href={linkToPDF} target="_blank" rel="noopener noreferrer">
