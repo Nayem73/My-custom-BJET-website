@@ -83,3 +83,19 @@ input[type='text'] {
     /* or pre-line */
     /* Add any other custom styles you'd like */
 }
+
+.styled-btn {
+    background-color: #4CAF50;
+    /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.styled-btn:hover {
+    background-color: #388E3C;
+    /* Darker green */
+}

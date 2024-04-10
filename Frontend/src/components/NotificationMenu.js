@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { listNotifications, sendNotification } from '../actions/notificationActions';
 import { Chat } from 'react-bootstrap-icons';
+import './NotificationMenu.css';
 
 export default function NotificationMenu({ userInfo, user }) {
   if (!userInfo) {
@@ -79,7 +80,7 @@ export default function NotificationMenu({ userInfo, user }) {
         />
 
 
-        <button
+        {/* <button
           className='send-button'
           onClick={sendHandler}
           style={{
@@ -93,7 +94,15 @@ export default function NotificationMenu({ userInfo, user }) {
           }}
         >
           Send
+        </button> */}
+
+        <button
+          className='styled-btn'
+          onClick={sendHandler}
+        >
+          Send
         </button>
+
 
       </div>
     </div>
