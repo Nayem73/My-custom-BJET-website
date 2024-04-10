@@ -125,21 +125,6 @@ h1 {
 }
 
 .cards__buttons button {
-  margin-right: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.cards__buttons button:hover {
-  background-color: #0056b3;
-}
-
-.styled-btn {
   background-color: #4CAF50;
   /* Green */
   border: none;
@@ -151,4 +136,8 @@ h1 {
   font-size: 14px;
   margin: 4px 2px;
   cursor: pointer;
+}
+
+.cards__buttons button:hover {
+  background-color: #388E3C;
 }

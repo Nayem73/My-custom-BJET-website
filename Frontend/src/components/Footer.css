@@ -214,3 +214,6 @@
   margin: 4px 2px;
   cursor: pointer;
 }
+.subscribe-btn:hover {
+  background-color: #388E3C;
+}
