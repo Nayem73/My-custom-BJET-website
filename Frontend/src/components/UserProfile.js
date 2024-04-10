@@ -96,63 +96,71 @@ function UserProfile() {
         <p>{user.email}</p>
         {isEditMode ? (
           <form onSubmit={handleSubmit}>
-            <label>B-JET Batch:</label>
-            <input
-              type="text"
-              name="bjetBatch"
-              value={updatedProfile.bjetBatch}
-              onChange={handleInputChange}
-            />
-            <label>About:</label>
-            <input
-              type="text"
-              name="about"
-              value={updatedProfile.about}
-              onChange={handleInputChange}
-            />
-            <label>Address:</label>
-            <input
-              type="text"
-              name="address"
-              value={updatedProfile.address}
-              onChange={handleInputChange}
-            />
-            <label>Company:</label>
-            <input
-              type="text"
-              name="company"
-              value={updatedProfile.company}
-              onChange={handleInputChange}
-            />
-            <label>Position:</label>
-            <input
-              type="text"
-              name="position"
-              value={updatedProfile.position}
-              onChange={handleInputChange}
-            />
-            <label>Technology Stack:</label>
-            <input
-              type="text"
-              name="technologyStack"
-              value={updatedProfile.technologyStack}
-              onChange={handleInputChange}
-            />
-            <label>Social:</label>
-            <input
-              type="text"
-              name="social"
-              value={updatedProfile.social}
-              onChange={handleInputChange}
-            />
-            {/* Optionally, add file input for image */}
-            <input
-              type="file"
-              name="img"
-              onChange={(e) => setUpdatedProfile({ ...updatedProfile, img: e.target.files[0] })}
-            />
-            <button type="submit">Save</button>
-            <button onClick={() => setIsEditMode(false)}>Cancel</button>
+            <div className="form-group">
+              <label>B-JET Batch:</label>
+              <input
+                type="text"
+                name="bjetBatch"
+                value={updatedProfile.bjetBatch}
+                onChange={handleInputChange}
+              />
+              <label>About:</label>
+              <input
+                type="text"
+                name="about"
+                value={updatedProfile.about}
+                onChange={handleInputChange}
+              />
+              <label>Address:</label>
+              <input
+                type="text"
+                name="address"
+                value={updatedProfile.address}
+                onChange={handleInputChange}
+              />
+              <label>Company:</label>
+              <input
+                type="text"
+                name="company"
+                value={updatedProfile.company}
+                onChange={handleInputChange}
+              />
+              <label>Position:</label>
+              <input
+                type="text"
+                name="position"
+                value={updatedProfile.position}
+                onChange={handleInputChange}
+              />
+              <label>Technology Stack:</label>
+              <input
+                type="text"
+                name="technologyStack"
+                value={updatedProfile.technologyStack}
+                onChange={handleInputChange}
+              />
+              <label>Social:</label>
+              <input
+                type="text"
+                name="social"
+                value={updatedProfile.social}
+                onChange={handleInputChange}
+              />
+              {/* Optionally, add file input for image */}
+              <label>Profile Picture:</label>
+              <div className="file-input">
+                <input
+                  type="file"
+                  name="img"
+                  onChange={(e) => setUpdatedProfile({ ...updatedProfile, img: e.target.files[0] })}
+                />
+              </div>
+
+              <div className="button-group">
+                <button type="submit" className="styled-btn green">Save</button>
+                <button onClick={() => setIsEditMode(false)} className="styled-btn red">Cancel</button>
+              </div>
+            </div>
           </form>
         ) : (
           <>
@@ -163,7 +171,7 @@ function UserProfile() {
             <p>{user.technologyStack}</p>
             <p>{user.social}</p>
             {isCurrentUserProfile && (
-              <button onClick={() => setIsEditMode(true)}>Update Profile</button>
+              <button className="styled-btn" onClick={() => setIsEditMode(true)}>Update Profile</button>
             )}
           </>
         )}

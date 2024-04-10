@@ -28,3 +28,86 @@
     display: block;
     /* Ensure proper centering */
 }
+
+.styled-btn {
+    background-color: #4CAF50;
+    /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.styled-btn:hover {
+    background-color: #388E3C;
+    /* Darker green */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #4CAF50;
+    /* Green */
+    border-radius: 4px;
+}
+
+input[type="text"]:focus {
+    border: 2px solid #388E3C;
+    /* Darker green */
+}
+
+.styled-btn {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    max-width: 200px;
+    /* Adjust as needed */
+    display: block;
+    /* To center the buttons */
+    margin: 0 auto;
+    /* To center the buttons */
+}
+
+.styled-btn.green {
+    background-color: #4CAF50;
+    /* Green */
+}
+
+.styled-btn.green:hover {
+    background-color: #388E3C;
+    /* Darker green */
+}
+
+.styled-btn.red {
+    background-color: #F44336;
+    /* Red */
+}
+
+.styled-btn.red:hover {
+    background-color: #C62828;
+    /* Darker red */
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    /* Add some space between the buttons */
+}
+
+.file-input {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+}
