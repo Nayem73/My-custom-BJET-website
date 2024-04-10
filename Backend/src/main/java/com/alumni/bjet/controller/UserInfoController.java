@@ -346,10 +346,10 @@ public class UserInfoController {
         }
     }
 
-    @PutMapping("/username/{username}")
+    @PostMapping("/username/{username}")
     public ResponseEntity<?> updateUserInfo(
             @PathVariable String username,
-            @RequestParam(value = "bjetBatch", required = false) String bjetBatch,
+            @RequestParam(required = false) String bjetBatch,
             @RequestParam(value = "about", required = false) String about,
             @RequestParam(value = "address", required = false) String address,
             @RequestParam(value = "company", required = false) String company,

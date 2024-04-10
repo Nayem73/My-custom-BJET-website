@@ -8,69 +8,61 @@ import NotificationMenu from './NotificationMenu';
 
 function UserProfile() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [updatedProfile, setUpdatedProfile] = useState({
-    bjetBatch: '',
-    about: '',
-    address: '',
-    company: '',
-    position: '',
-    technologyStack: '',
-    social: ''
-  });
-
   const { id } = useParams();
   const navigate = useNavigate();
 
   // User Information
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
-  console.log('User Info:', userInfo);
-  console.log('User:', user);
 
   useEffect(() => {
     axios.get(`/api/users/${id}`)
       .then(response => {
         setUser(response.data);
-        setLoading(false);
         console.log('User fetched:', response.data);
       })
       .catch(error => {
         console.error('Error fetching user:', error);
-        setLoading(false);
       });
   }, [id]);
 
-  const isCurrentUserProfile = userInfo && user && userInfo.id === user.id;
+  const updateUser = (updatedUser) => {
+  const formData = new FormData();
+  for (const key in updatedUser) {
+    formData.append(key, updatedUser[key]);
+  }
 
-  const handleInputChange = (e) => {
-  const { name, value } = e.target;
-    setUpdatedProfile(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+  axios.post(`/api/username/${userInfo.username}`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+  .then(response => {
+    console.log('User updated:', response.data);
+    setUser(response.data);
+  })
+  .catch(error => {
+    console.error('Error updating user:', error);
+  });
+};
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const updatedUser = {
+      bjetBatch: event.target.bjetBatch.value,
+      about: event.target.about.value,
+      address: event.target.address.value,
+      company: event.target.company.value,
+      position: event.target.position.value,
+      technologyStack: event.target.technologyStack.value,
+      social: event.target.social.value,
+      img: event.target.img.files[0]
+    };
+    updateUser(updatedUser);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Send a PUT request to update the user's profile
-    axios.put(`/api/username/${user.userName}`, updatedProfile)
-    .then(response => {
-      // Handle successful update
-      console.log('Profile updated successfully:', response.data);
-      // Optionally, you can navigate the user back to their profile page
-      navigate(`/users/${id}`);
-      // Exit edit mode after updating profile
-      setIsEditMode(false);
-    })
-    .catch(error => {
-      // Handle error
-      console.error('Error updating profile:', error);
-    });
-  };
-
-  if (loading) {
+  if (!user) {
     return <div>Loading...</div>;
   }
 
@@ -80,81 +72,24 @@ function UserProfile() {
       <div className='user-profile-info'>
         <h1>{user.userName}</h1>
         <p>{user.email}</p>
-        {isEditMode ? (
-          <form onSubmit={handleSubmit}>
-            <label>B-JET Batch:</label>
-            <input
-              type="text"
-              name="bjetBatch"
-              value={updatedProfile.bjetBatch}
-              onChange={handleInputChange}
-            />
-            <label>About:</label>
-            <input
-              type="text"
-              name="about"
-              value={updatedProfile.about}
-              onChange={handleInputChange}
-            />
-            <label>Address:</label>
-            <input
-              type="text"
-              name="address"
-              value={updatedProfile.address}
-              onChange={handleInputChange}
-            />
-            <label>Company:</label>
-            <input
-              type="text"
-              name="company"
-              value={updatedProfile.company}
-              onChange={handleInputChange}
-            />
-            <label>Position:</label>
-            <input
-              type="text"
-              name="position"
-              value={updatedProfile.position}
-              onChange={handleInputChange}
-            />
-            <label>Technology Stack:</label>
-            <input
-              type="text"
-              name="technologyStack"
-              value={updatedProfile.technologyStack}
-              onChange={handleInputChange}
-            />
-            <label>Social:</label>
-            <input
-              type="text"
-              name="social"
-              value={updatedProfile.social}
-              onChange={handleInputChange}
-            />
-            {/* Optionally, add file input for image */}
-            {/* <input
-              type="file"
-              name="img"
-              onChange={(e) => setUpdatedProfile({ ...updatedProfile, img: e.target.files[0] })}
-            /> */}
-            <button type="submit">Save</button>
-            <button onClick={() => setIsEditMode(false)}>Cancel</button>
-          </form>
-        ) : (
-          <>
-            <p>{user.about}</p>
-            <p>{user.address}</p>
-            <p>{user.company}</p>
-            <p>{user.position}</p>
-            <p>{user.technologyStack}</p>
-            <p>{user.social}</p>
-            {isCurrentUserProfile && (
-              <button onClick={() => setIsEditMode(true)}>Update Profile</button>
-            )}
-          </>
-        )}
+        {user.about && <p>{user.about}</p>}
+        {user['B-JET Batch'] && <p>B-JET Batch: {user['B-JET Batch']}</p>}
+        {user.address && <p>Address: {user.address}</p>}
+        {user.company && <p>Company: {user.company}</p>}
+        {user.position && <p>Position: {user.position}</p>}
       </div>
-      <NotificationMenu userInfo={userInfo} user={user} />
+      <form onSubmit={handleSubmit}>
+        <input name="bjetBatch" placeholder="B-JET Batch" />
+        <input name="about" placeholder="About" />
+        <input name="address" placeholder="Address" />
+        <input name="company" placeholder="Company" />
+        <input name="position" placeholder="Position" />
+        <input name="technologyStack" placeholder="Technology Stack" />
+        <input name="social" placeholder="Social" />
+        <input type="file" name="img" />
+        <button type="submit">Update</button>
+      </form>
+      <NotificationMenu userInfo={userInfo} user={user} updateUser={updateUser}/>
     </div>
   );
 }
