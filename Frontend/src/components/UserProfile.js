@@ -42,7 +42,7 @@ function UserProfile() {
       });
   }, [id]);
 
-  const isCurrentUserProfile = userInfo && user && userInfo.id === user.id;
+  const isCurrentUserProfile = userInfo && user && userInfo.username === user.userName;
 
   const handleInputChange = (e) => {
   const { name, value } = e.target;
