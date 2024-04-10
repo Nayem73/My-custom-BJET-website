@@ -6,6 +6,22 @@
   justify-content: center;
   align-items: center;
 }
+.logo {
+  width: auto;
+  /* Maintain the original aspect ratio */
+  height: 50px;
+  /* Set a fixed height for all logos */
+}
+.footer-logo {
+  display: flex;
+  /* Use flexbox to layout children horizontally */
+  justify-content: center;
+  /* Center the logos horizontally */
+  align-items: center;
+  /* Center the logos vertically */
+  gap: 10px;
+  /* Add some space between the logos */
+}
 
 .footer-subscription {
   display: flex;
@@ -17,6 +33,15 @@
   margin-bottom: 24px;
   padding: 24px;
   color: #fff;
+}
+
+.logo-large {
+  height: 75px;
+  /* Adjust this value as needed */
+}
+.logo-extra-large {
+  height: 105px;
+  /* Adjust this value as needed */
 }
 
 .footer-subscription > p {
