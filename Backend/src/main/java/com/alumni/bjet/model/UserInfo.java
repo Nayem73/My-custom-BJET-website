@@ -76,18 +76,11 @@ public class UserInfo {
     @Column(name = "notificationCount")
     private Long notificationCount;
 
+    @Column(name = "technologyStack")
+    String technologyStack;
 
-    @ElementCollection
-    @CollectionTable(name = "technology_stack", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "technology")
-    private List<String> technologyStack = new ArrayList<>();
-
-    @ElementCollection
-    @CollectionTable(name = "social_media", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "value")
-    @MapKeyColumn(name = "platform")
-    private Map<String, String> social = new HashMap<>();
-
+    @Column(name = "socail")
+    String social;
 
     public UserInfo() {
         this.profilePicture = "/api/picture?link=static/avatar.png";
@@ -180,22 +173,6 @@ public class UserInfo {
         this.position = position;
     }
 
-    public List<String> getTechnologyStack() {
-        return technologyStack;
-    }
-
-    public void setTechnologyStack(String currentTechnology) {
-        technologyStack.add(currentTechnology);
-    }
-
-    public Map<String, String> getSocial() {
-        return social;
-    }
-
-    public void setSocial(String platform, String handle) {
-        social.put(platform, handle);
-    }
-
     public String getBjetBatch() {
         return bjetBatch;
     }
@@ -218,5 +195,21 @@ public class UserInfo {
 
     public void setNotificationCount(Long notificationCount) {
         this.notificationCount = notificationCount;
+    }
+
+    public String getTechnologyStack() {
+        return technologyStack;
+    }
+
+    public void setTechnologyStack(String technologyStack) {
+        this.technologyStack = technologyStack;
+    }
+
+    public String getSocial() {
+        return social;
+    }
+
+    public void setSocial(String social) {
+        this.social = social;
     }
 }

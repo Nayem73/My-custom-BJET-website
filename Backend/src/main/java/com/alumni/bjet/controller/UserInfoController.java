@@ -18,7 +18,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 @RestController
@@ -339,5 +344,86 @@ public class UserInfoController {
             response.put("message", "User not found for username: " + username);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
+    }
+
+    @PutMapping("/username/{username}")
+    public ResponseEntity<?> updateUserInfo(
+            @PathVariable String username,
+            @RequestParam(value = "bjetBatch", required = false) String bjetBatch,
+            @RequestParam(value = "about", required = false) String about,
+            @RequestParam(value = "address", required = false) String address,
+            @RequestParam(value = "company", required = false) String company,
+            @RequestParam(value = "position", required = false) String position,
+            @RequestParam(value = "technologyStack", required = false) String technologyStack,
+            @RequestParam(value = "social", required = false) String social,
+            @RequestParam(value = "img", required = false) MultipartFile file) throws IOException {
+
+        UserInfo userInfo = null;
+        Optional<UserInfo> userInfoOptional = userInfoRepository.findByUserName(username);
+
+        if (userInfoOptional.isPresent()) {
+            userInfo = userInfoOptional.get();
+        } else {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "User not found for username: " + username);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        // Check if the uploaded file is an image
+        if (file != null && !file.isEmpty() && !isImageFile(file)) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Only image files are allowed.");
+            return ResponseEntity.badRequest().body(errorResponse);
+        } else if (file != null) {
+            String imagePath = "src/main/resources/static";
+
+            // Create the directory if it doesn't exist
+            Path imageDir = Paths.get(imagePath);
+            if (!Files.exists(imageDir)) {
+                Files.createDirectories(imageDir);
+            }
+
+            // Generate a unique file name for the image
+            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+
+            // Save the image file using the provided path
+            Path targetPath = imageDir.resolve(fileName);
+            Files.copy(file.getInputStream(), targetPath);
+
+            userInfo.setProfilePicture("/api/picture?link=static/" + fileName);
+        }
+
+        if (bjetBatch != null) {
+            userInfo.setBjetBatch(bjetBatch);
+        }
+        if (about != null) {
+            userInfo.setAbout(about);
+        }
+        if (address != null) {
+            userInfo.setAddress(address);
+        }
+        if (company != null) {
+            userInfo.setCompany(company);
+        }
+        if (position != null) {
+            userInfo.setPosition(position);
+        }
+
+        if (technologyStack != null) {
+            userInfo.setTechnologyStack(technologyStack);
+        }
+
+        if (social != null) {
+            userInfo.setSocial(social);
+        }
+
+        userInfoRepository.save(userInfo);
+
+        // Return the saved user with appropriate HTTP status
+        return ResponseEntity.status(HttpStatus.CREATED).body(userInfo);
+    }
+    private boolean isImageFile(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        return fileName != null && (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png"));
     }
 }

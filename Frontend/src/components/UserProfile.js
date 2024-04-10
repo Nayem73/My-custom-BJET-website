@@ -31,20 +31,22 @@ function UserProfile() {
   }
 
   return (
-    <div className='user-profile'>
-      <img src={user.profilePicture} alt={user.userName} className='user-profile-picture' />
-      <div className='user-profile-info'>
-        <h1>{user.userName}</h1>
-        <p>{user.email}</p>
-        <p>{user.about}</p>
-        <p>B-JET Batch: {user['B-JET Batch']}</p>
-        <p>Address: {user.address}</p>
-        <p>Company: {user.company}</p>
-        <p>Position: {user.position}</p>
-      </div>
-      <NotificationMenu userInfo={userInfo} user={user}/>
+  <div className='user-profile'>
+    <img src={user.profilePicture} alt={user.userName} className='user-profile-picture' />
+    <div className='user-profile-info'>
+      <h1>{user.userName}</h1>
+      <p>{user.email}</p>
+      {user.about && <p>{user.about}</p>}
+      {user['B-JET Batch'] && <p>B-JET Batch: {user['B-JET Batch']}</p>}
+      {user.address && <p>Address: {user.address}</p>}
+      {user.company && <p>Company: {user.company}</p>}
+      {user.position && <p>Position: {user.position}</p>}
     </div>
-  );
+    <NotificationMenu userInfo={userInfo} user={user}/>
+  </div>
+);
+
+
 }
 
 export default UserProfile;
