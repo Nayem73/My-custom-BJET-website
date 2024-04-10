@@ -15,10 +15,10 @@ function Cards() {
       </p>
         <div className='cards__buttons'>
         <Link to="/aboutus">
-          <button className="styled-btn">Background & Achievements</button>
+          <button>Background & Achievements</button>
         </Link>
         <Link to="/program-contents">
-          <button className="styled-btn">Program Contents</button>
+          <button>Program Contents</button>
         </Link>
         </div>
       <div className='cards__image-link'>
