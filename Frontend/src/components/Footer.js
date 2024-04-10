@@ -7,16 +7,17 @@ import Footer2 from '../images/Footer2.webp';
 import Footer3 from '../images/Footer3.webp';
 import Footer4 from '../images/Footer4.webp';
 import Footer5 from '../images/Footer5.webp';
+import BjetLogo from '../images/logo.png';
 
 function Footer() {
   return (
     <div className='footer-container'>
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
-          Join the Adventure newsletter to receive our best vacation deals
+          Join B-JET to work as an ICT Engineer in Japan!
         </p>
         <p className='footer-subscription-text'>
-          You can unsubscribe at any time.
+          You can unsubscribe for newsletters at any time.
         </p>
         <div className='input-areas'>
           <form>
@@ -37,11 +38,26 @@ function Footer() {
           {/* TRVL */}
           {/* <i class='fab fa-typo3' /> */}
         </Link>
-        <img src={Footer1} alt='Logo 1' className='logo'/>
-        <img src={Footer2} alt='Logo 2' className='logo'/>
-        <img src={Footer3} alt='Logo 3' className='logo logo-extra-large'/>
-        <img src={Footer4} alt='Logo 4' className='logo logo-large'/>
-        <img src={Footer5} alt='Logo 5' className='logo logo-large'/>
+        <div className='logo-container'>
+  <img src={Footer1} alt='Logo 1' className='logo'/>
+  <p className='logo-title'>University of Miyazaki</p>
+</div>
+<div className='logo-container'>
+  <img src={Footer2} alt='Logo 2' className='logo'/>
+  <p className='logo-title'>Emerging Publisher Keirinkan Co., Ltd.</p>
+</div>
+<div className='logo-container'>
+  <img src={Footer3} alt='Logo 3' className='logo logo-extra-large'/>
+  <p className='logo-title'>North South University</p>
+</div>
+<div className='logo-container'>
+  <img src={Footer4} alt='Logo 4' className='logo logo-large'/>
+  <p className='logo-title'>BJIT Group</p>
+</div>
+<div className='logo-container'>
+  <img src={Footer5} alt='Logo 5' className='logo logo-large'/>
+  <p className='logo-title'>B&M Inc.</p>
+</div>
       </div>
 
 
@@ -49,11 +65,10 @@ function Footer() {
         <div class='social-media-wrap'>
           <div class='footer-logo'>
             <Link to='/' className='social-logo'>
-              B-JET
-              <i class='fab fa-typo3' />
+              <img src={BjetLogo} alt="B-JET Logo" className='logo' /> 
             </Link>
           </div>
-          <small class='website-rights'>TRVL © 2020</small>
+          <small class='website-rights'>Copyright © 2021 University of Miyazaki. All Rights Reserved.</small>
           <div class='social-icons'>
             <Link
               class='social-icon-link facebook'

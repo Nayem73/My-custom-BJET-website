@@ -34,6 +34,21 @@
   padding: 24px;
   color: #fff;
 }
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px;
+  /* Adjust this value to increase or decrease the space between logos */
+}
+
+.logo-title {
+  color: #fff;
+  /* Adjust this value to change the color of the title */
+  font-size: 14px;
+  /* Adjust this value to change the size of the title */
+  text-align: center;
+}
 
 .logo-large {
   height: 75px;
