@@ -4,6 +4,8 @@ import './Cards.css';
 import CardItem from './CardItem';
 import NewImage from '../images/220804v6.jpg';
 import bjet14thBatch from '../images/bjet14thBatch.webp';
+import testimonial1 from '../images/testimonial1.webp';
+import testimonial2 from '../images/testimonial2.webp';
 import { Link } from 'react-router-dom';
 
 function Cards() {
@@ -105,6 +107,25 @@ function Cards() {
           <li>Time: 8:30 a.m. to 4:00 p.m.</li>
         </ul>
       </div>
+
+      <div className='testimonial'>
+      <div className='testimonial__item'>
+        <img src={testimonial1} alt="Nusrat Tahsin Kamaly" className='testimonial__image' />
+        <div className='testimonial__content'>
+          <h3 className='testimonial__name'>Nusrat Tahsin Kamaly</h3>
+          <p className='testimonial__about'>Software Engineer from Thesaurus Inc.,Japan</p>
+          <p className='testimonial__text'>I was a BJET trainee in their 9th Batch. We attended classes 5 days a week, for 5 months. Everyday we learned something new about the Japanese language, Culture and Business Etiquettes. Every week, we were given the opportunity to have direct conversations with Japanese people online. Even after I was done with the training, I got tremendous support during my Visa application. Everything I learned from BJET has made adapting to the Japanese lifestyle a lot easier. I feel confident to approach people in Japan and they also appreciate that I invested my time to learn about their culture.</p>
+        </div>
+      </div>
+      <div className='testimonial__item'>
+        <img src={testimonial2} alt="Md. Sazzad Hossain" className='testimonial__image' />
+        <div className='testimonial__content'>
+          <h3 className='testimonial__name'>Md. Sazzad Hossain</h3>
+          <p className='testimonial__about'>System Engineer from Co-Well Co., Ltd.</p>
+          <p className='testimonial__text'>As a fresh graduate with the dream to join a reputed IT firm in Japan, it seemed hard, and I felt lost at first. However, soon with the help of B-JET, I was finally able to reach my goal. This is a program for people who have a passion to build their careers in Japan with the goal to learn and develop. If you have a strong conviction, determined about reaching your target, B-JET will surely guide you to the best of its abilities and help you reach your goal.</p>
+        </div>
+      </div>
+    </div>
     </div>
   );
 }
