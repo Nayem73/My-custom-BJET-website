@@ -21,7 +21,7 @@ function Alumni() {
     <div className='cards'>
       <h1>B-JET Alumni</h1>
       <p style={{ textAlign: 'center', fontSize: '1.2rem', fontWeight: 'bold' }}>
-        Our alumni have gone on to work in various industries in Japan, including IT, finance, and healthcare. They are making a positive impact in their communities and contributing to the growth of the Japanese economy.
+        Our alumni have gone on to work in various IT industries in Japan. They are making a positive impact in their communities and contributing to the growth of the Japanese technology and economy.
       </p>
       <div className='cards__container'>
         <div className='cards__wrapper'>
