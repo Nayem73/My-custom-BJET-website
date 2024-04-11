@@ -6,7 +6,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Add this line */
 }
 .cards__header,
 .cards__subheader {
@@ -30,13 +29,11 @@
   justify-content: space-around;
   width: 100%;
   max-width: 600px;
-  /* Adjust as needed */
   margin-bottom: 2rem;
 }
 
 .cards__button {
   background-color: #4CAF50;
-  /* Green */
   border: none;
   color: white;
   padding: 10px 20px;
@@ -44,10 +41,24 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 0 10px;
+  margin: 4px 2px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+}
+.cards__container {
+  margin-bottom: 2rem;
+}
+.cards__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+.cards__list {
+  list-style-type: disc;
+  margin-left: 2rem;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
 }
 
 .cards__button:hover {
