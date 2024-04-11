@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Cards.css';
+import './Alumni.css';
 import CardItem from './CardItem';
 
 function Alumni() {
