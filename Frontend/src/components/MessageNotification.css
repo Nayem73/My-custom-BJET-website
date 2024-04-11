@@ -52,3 +52,20 @@
 .message-notification-container:hover .notification-dropdown {
     display: block;
 }
+
+/* Add cursor pointer to each notification item */
+.notification-dropdown p {
+    cursor: pointer;
+}
+
+/* Add hover styling for notification items */
+.notification-dropdown p:hover {
+    background-color: #f0f0f0;
+    /* Light grey background on hover */
+    border-radius: 4px;
+    /* Rounded corners */
+    padding: 0.5em;
+    /* Some padding */
+    margin: 0.5em 0;
+    /* Space between items */
+}
