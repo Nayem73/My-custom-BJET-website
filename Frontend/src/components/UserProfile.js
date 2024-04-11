@@ -176,7 +176,7 @@ function UserProfile() {
           </>
         )}
       </div>
-      <NotificationMenu userInfo={userInfo} user={user} />
+      {!isCurrentUserProfile && <NotificationMenu userInfo={userInfo} user={user} />}
     </div>
   );
 }
