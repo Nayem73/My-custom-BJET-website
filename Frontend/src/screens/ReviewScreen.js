@@ -183,7 +183,14 @@ function ReviewScreen() {
                                 <div className="inline-flex items-center justify-center flex-shrink-0 w-15 h-10 mb-5 py-2 text-blue-500 bg-blue-100 rounded-full dark:bg-blue-500 dark:text-blue-100">
                                 
                                     <i class="fa-regular fa-user fa-2xl lg:px-8 md:px-4 sm:px-2"></i>
-                                    <Link to={`/users/${userIds[review.userName]}`} className='lg:px-8 md:px-4  sm:px-2 font-bold text-xl title-font username'>{review.userName}</Link>
+                                        <Link 
+                                            to={`/users/${userIds[review.userName]}`} 
+                                            className='lg:px-8 md:px-4  sm:px-2 font-bold text-xl title-font'
+                                            style={{ color: 'white' }} // Change the color here
+                                        >
+                                            {review.userName}
+                                        </Link>
+
                                 </div>
 
 
