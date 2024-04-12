@@ -111,3 +111,37 @@ input[type="text"]:focus {
     justify-content: center;
     /* Center horizontally */
 }
+
+.user-profile-info h1 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.user-profile-info p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.user-profile-info p::before {
+    content: '🔹';
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.user-profile-info .styled-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.user-profile-info .styled-btn:hover {
+    background-color: #388E3C;
+}
