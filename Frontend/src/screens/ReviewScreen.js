@@ -171,7 +171,7 @@ function ReviewScreen() {
 
     return <div>
         <div className="mt-5 flex flex-col w-full text-center">
-            <h1 className="mb-6 text-2xl font-semibold tracking-widest text-black uppercase title-font">Reviews</h1>
+            <h1 className="mb-6 text-2xl font-semibold tracking-widest text-black uppercase title-font">Community Blog Section</h1>
         </div>
         <div className="container px-5 py-4 mx-auto">
         {loadingReviewList ? <Loader /> : errorReviewList ?<div className="flex justify-center"><Message  message={errorReviewList} /> </div> :
@@ -249,7 +249,7 @@ function ReviewScreen() {
 
 
         <div className="flex justify-center mb-5 mt-5">
-            <h1 className="mb-6 text-2xl font-semibold tracking-widest text-black uppercase title-font">Create or Update Reviews</h1>
+            <h1 className="mb-6 text-2xl font-semibold tracking-widest text-black uppercase title-font">Create or Update Posts</h1>
         </div>
         
 
@@ -304,7 +304,7 @@ function ReviewScreen() {
             <div className='py-4 flex justify-left'>
                 {editingReview?<>
                     <button type='submit' className=' btn btn-primary w-24'>Update</button>
-                    <div onClick={()=>editCancelHandler()} className=' btn btn-primary w-24 mx-5'>Cancle</div>
+                    <div onClick={()=>editCancelHandler()} className=' btn btn-primary w-24 mx-5'>Cancel</div>
                 </>:
                 <>
                 <button type='submit' className=' btn btn-primary w-24'>Submit</button>
@@ -329,7 +329,7 @@ function ReviewScreen() {
                 
                 <p className="text-base leading-relaxed ">Please <Link to={'/login'} className="font-bold
                 text-blue-500
-                ">Login</Link> to create or update reviews</p>
+                ">Login</Link> to create or update posts</p>
             </div>
 
         </div>
