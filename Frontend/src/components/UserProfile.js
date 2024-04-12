@@ -94,7 +94,7 @@ function UserProfile() {
       <img src={user.profilePicture} alt={user.userName} className='user-profile-picture' />
       <div className='user-profile-info'>
         <h1>{user.userName}</h1>
-        <p>Email: {user.email}</p>
+        <p><b>Email:</b> {user.email}</p>
         {isEditMode ? (
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -165,14 +165,14 @@ function UserProfile() {
           </form>
         ) : (
           <>
-            {user.profile && <p>{user.profile}</p>}
-            {user['B-JET Batch'] && <p>B-JET Batch: {user['B-JET Batch']}</p>}
-            {user.about && <p>About: {user.about}</p>}
-            {user.address && <p>Current Address: {user.address}</p>}
-            {user.company && <p>Current Company: {user.company}</p>}
-            {user.position && <p>Current Position: {user.position}</p>}
-            {user.technologyStack && <p>Technology Stack: {user.technologyStack}</p>}
-            {user.social && <p>Social: {user.social}</p>}
+            {user.profile && <p><b>{user.profile}</b></p>}
+            {user['B-JET Batch'] && <p><b>B-JET Batch:</b> {user['B-JET Batch']}</p>}
+            {user.about && <p><b>About:</b> {user.about}</p>}
+            {user.address && <p><b>Current Address:</b> {user.address}</p>}
+            {user.company && <p><b>Current Company:</b> {user.company}</p>}
+            {user.position && <p><b>Current Position:</b> {user.position}</p>}
+            {user.technologyStack && <p><b>Technology Stack:</b> {user.technologyStack}</p>}
+            {user.social && <p><b>Social:</b> {user.social}</p>}
 
             {isCurrentUserProfile && (
               <button className="styled-btn" onClick={() => setIsEditMode(true)}>Update Profile</button>
