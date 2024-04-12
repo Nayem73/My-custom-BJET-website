@@ -250,12 +250,12 @@ public class UserInfoController {
         }
         UserInfo userInfo =  userInfoRepository.findById(id);
         Map<String, Object> response = new LinkedHashMap<>();
-        if (userInfo.getRole().equals("ROLE_BJET")) response.put("profile", "B-JET Graduate");
+        if (userInfo.getRole().equals("ROLE_ADMIN")) response.put("profile", "B-JET Graduate");
         response.put("profilePicture", userInfo.getProfilePicture());
         response.put("userName", userInfo.getUserName());
         response.put("email", userInfo.getEmail());
         response.put("about", userInfo.getAbout());
-        if (userInfo.getRole().equals("ROLE_BJET")) {
+        if (userInfo.getRole().equals("ROLE_ADMIN")) {
             response.put("B-JET Batch", userInfo.getBjetBatch());
             response.put("address", userInfo.getAddress());
             response.put("company", userInfo.getCompany());
