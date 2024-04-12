@@ -112,10 +112,22 @@ input[type="text"]:focus {
     /* Center horizontally */
 }
 
+/* design the user profile */
+.user-profile-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
 .user-profile-info h1 {
     font-size: 32px;
     color: #333;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .user-profile-info p {
@@ -123,6 +135,10 @@ input[type="text"]:focus {
     color: #666;
     margin-bottom: 10px;
     line-height: 1.6;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
 .user-profile-info p::before {
