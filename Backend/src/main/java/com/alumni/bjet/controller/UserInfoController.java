@@ -240,7 +240,7 @@ public class UserInfoController {
 
     @GetMapping("/alumni/")
     public ResponseEntity<?> getAlumni() {
-        List<UserInfo> bjetAlumni = userInfoRepository.findByRole("ROLE_BJET");
+        List<UserInfo> bjetAlumni = userInfoRepository.findByRole("ROLE_ADMIN");
         return ResponseEntity.ok(bjetAlumni);
     }
     @GetMapping("/users/{id}")

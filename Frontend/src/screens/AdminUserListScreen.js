@@ -80,7 +80,7 @@ const UserListScreen = () => {
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Admin</th>
+                            <th>B-JET</th>
                             <th></th>
                         </tr>
                     </thead>

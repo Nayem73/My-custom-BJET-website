@@ -12,6 +12,7 @@ import Home from './components/pages/Home';
 import Alumni from './components/Alumni';
 import UserProfile from './components/UserProfile';
 import AboutUs from './components/AboutUs';
+import UserListScreen from './screens/AdminUserListScreen';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/alumni' element={<Alumni />} />
           <Route path='/users/:id' element={<UserProfile />} />
           <Route path='/aboutus' element={<AboutUs />} />
+          <Route path='/admin/userlist/' element={<UserListScreen />} />
         </Routes>
     </>
   );  
