@@ -13,6 +13,7 @@ import Alumni from './components/Alumni';
 import UserProfile from './components/UserProfile';
 import AboutUs from './components/AboutUs';
 import UserListScreen from './screens/AdminUserListScreen';
+import BjetResourceScreen from './screens/BjetResourceScreen';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/users/:id' element={<UserProfile />} />
           <Route path='/aboutus' element={<AboutUs />} />
           <Route path='/admin/userlist/' element={<UserListScreen />} />
+          <Route path='/resources' element={<BjetResourceScreen />} />
         </Routes>
     </>
   );  
