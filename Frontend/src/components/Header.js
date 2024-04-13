@@ -68,7 +68,7 @@ function Header() {
                             {dropdownOpen && (
                                 <div className='header-dropdown-content'>
                                     <Link to={`/users/${userId}`} className='header-dropdown-link'>Profile</Link>
-                                    <Link to={'/review'} className='header-dropdown-link'>Review</Link>
+                                    <Link to={'/review'} className='header-dropdown-link'>Blog</Link>
                                     {userInfo.isAdmin && (
                                         <>
                                             <Link to={'/admin/userlist'} className='header-dropdown-link'>Users</Link>
