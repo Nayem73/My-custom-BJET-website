@@ -4,14 +4,14 @@ import Hiragana from '../images/Hiragana.pdf';
 
 function BreakTheBarrier() {
     return (
-        <div className="container">
-            <div className="card">
-                <div className="card-body">
-                    <h2 className="card-title" style={{ fontSize: '28px' }}>Break the Barrier</h2>
-                    <p className="highlighted-text">This section should contain unique learning roadmap, steps, materials and resources in an organized format that will help narrow the gap between Bangla and Japanese language and culture.</p>
+        <div className="btb-container">
+            <div className="btb-card">
+                <div className="btb-card-body">
+                    <h2 className="btb-card-title" style={{ fontSize: '28px' }}>Break the Barrier</h2>
+                    <p className="btb-highlighted-text">This section should contain unique learning roadmap, steps, materials and resources in an organized format that will help narrow the gap between Bangla and Japanese language and culture.</p>
                     
-                    <div className="pdf-container">
-                        <iframe src={Hiragana} title="Hiragana PDF" className="pdf-viewer"></iframe>
+                    <div className="btb-pdf-container">
+                        <iframe src={Hiragana} title="Hiragana PDF" className="btb-pdf-viewer"></iframe>
                     </div>
                 </div>
             </div>

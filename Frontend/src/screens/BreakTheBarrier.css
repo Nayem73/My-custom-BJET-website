@@ -1,37 +1,45 @@
-.container {
+.btb-container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px;
+    display: flex;
+    /* Add this */
+    justify-content: center;
+    /* Add this */
+    align-items: center;
+    /* Add this */
+    min-height: 100vh;
+    /* Add this */
 }
 
-.card {
+.btb-card {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
-    width: 70%;
+    width: 90%;
 }
 
-.card-body {
+.btb-card-body {
     padding: 20px;
 }
 
-.card-title {
+.btb-card-title {
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin-bottom: 15px;
 }
 
-.card-body p {
+.btb-card-body p {
     font-size: 18px;
     /* increased font size */
     line-height: 1.5;
     margin-bottom: 15px;
 }
 
-.highlighted-text {
+.btb-highlighted-text {
     background-color: rgba(111, 255, 0, 0.732);
     /* added background color */
     padding: 10px;
@@ -40,14 +48,14 @@
     /* added border-radius */
 }
 
-.pdf-container {
+.btb-pdf-container {
     position: relative;
     width: 100%;
     height: 5000px;
     /* Adjust the height as needed */
 }
 
-.pdf-viewer {
+.btb-pdf-viewer {
     width: 100%;
     height: 100%;
     border: none;
