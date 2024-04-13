@@ -72,9 +72,6 @@ function Header() {
                                     {userInfo.isAdmin && (
                                         <>
                                             <Link to={'/admin/userlist'} className='header-dropdown-link'>Users</Link>
-                                            <Link to={'/admin/disease/'} className='header-dropdown-link'>Diseases</Link>
-                                            <Link to={'/admin/crop/'} className='header-dropdown-link'>Crops</Link>
-                                            <Link to={'/admin/subscriptions'} className='header-dropdown-link'>Subscriptions</Link>
                                         </>
                                     )}
                                     <button onClick={logOutHandler} className='header-dropdown-link'>Logout</button>

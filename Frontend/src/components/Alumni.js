@@ -16,7 +16,7 @@ function Alumni() {
         console.error('Error fetching users:', error);
       });
   }, []);
-
+console.log("******************--->", users);
   return (
     <div className='cards'>
       <h1>B-JET Alumni</h1>
@@ -30,8 +30,9 @@ function Alumni() {
               <CardItem
                 key={user.id}
                 src={user.profilePicture} // Use the profilePicture provided by your backend
-                text={user.about || 'No description available'} // Use the about provided by your backend
-                label={`${user.bjetBatch} Batch`}
+                text={user.position || 'Software Engineer'} // Use the about provided by your backend
+                company={user.company || 'BJET'} // Use the about provided by your backend
+                label={`Batch ${user.bjetBatch}`}
                 path={`/users/${user.id}`} // Replace with the actual path to view user details
               />
             ))}
