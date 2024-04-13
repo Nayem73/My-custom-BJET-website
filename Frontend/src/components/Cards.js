@@ -21,9 +21,9 @@ function Cards() {
         <Link to="/aboutus">
           <button className='cards__button'>Background & Achievements</button>
         </Link>
-        <Link to="/program-contents">
+        {/* <Link to="/program-contents">
           <button className='cards__button'>Program Contents</button>
-        </Link>
+        </Link> */}
       </div>
       <div className='cards__image-link'>
         <a href={linkToPDF} target="_blank" rel="noopener noreferrer">
