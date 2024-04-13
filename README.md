@@ -26,16 +26,80 @@
 
 ![](assets/2024-04-11-18-06-29-image.png)
 
-# Chat with B-JET graduates
+# Sign in or Create a new account
 
-### Send a Message to Anyone Specially to a B-JET Graduate
+![](assets/2024-04-13-13-03-21-image.png)
 
-![](assets/2024-04-11-18-13-39-image.png)
 
-### Received messages will be shown like below
 
-![](assets/f142e15f8f2958d6b9bd3718b8826d465cb44fbb.png)
+# Only B-JET Super Admin can make a user a B-JET Graduate
+
+![](assets/2024-04-13-13-04-02-image.png)
+
+
+
+# Explore the Achievements of B-JET Graduates and Ask for Guidance in Chat!
+
+### Explore the B-JET Alumni
+
+![](assets/2024-04-13-12-51-05-image.png)
+
+### Click on a profile and know about him/her and his/her achievements!
+
+![](assets/2024-04-13-12-55-57-image.png)
+
+### And don't forget to send him/her a message!
+
+![](assets/2024-04-13-12-56-34-image.png)
+
+
+
+### New received message will be notified with a popup message icon with the number of messages. Click/Hover on the icon to view the message.
+
+![](assets/7320c3269e4cdd102745a1182f4857c926910025.png)
+
+
 
 ### Update your profile with correct info
 
-![](assets/2024-04-11-18-15-31-image.png)
+![](assets/2024-04-13-13-01-07-image.png)
+
+
+
+# Resources
+
+### In the Resources section, you can find the latest resources provided by the B-JET authority for the IT students.
+
+![](assets/2024-04-13-13-05-41-image.png)
+
+# Break The Barrier
+
+### Learning Resources
+
+![](assets/2024-04-13-13-06-22-image.png)
+
+# Community Blog
+
+### In the Community Blog section, anyone can post about his/her interst and findings and all the registerd and unregistered users can view the blogs and share his/her findings by creating an account.
+
+![](assets/2024-04-13-13-08-35-image.png)
+
+
+
+# About Us
+
+### Know about background and achievements of B-JET
+
+![](assets/2024-04-13-13-10-06-image.png)
+
+
+
+# B-JET Super Admin Account Functionality
+
+### Only Super Admins can make a registered user to B-JET graduate
+
+![](assets/2024-04-13-13-12-19-image.png)
+
+### Super Admins can delete any inappropriate or harmful blog post
+
+![](assets/2024-04-13-13-13-00-image.png)
