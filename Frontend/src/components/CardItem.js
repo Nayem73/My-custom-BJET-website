@@ -14,6 +14,7 @@ function CardItem(props) {
             />
           </figure>
           <div className='cards__item__info'>
+            {props.name?<h5 className='cards__item__text'>{props.name}</h5> : null}
             <h5 className='cards__item__text'>{props.text}</h5>
             {props.company?<h5 className='cards__item__text'>{props.company}</h5> : null}
           </div>

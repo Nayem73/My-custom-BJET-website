@@ -53,7 +53,7 @@ public class UserInfoController {
             @RequestParam("password") String password) {
 
         Map<String, Object> response = new LinkedHashMap<>();
-        if (userName.length() > 10) {
+        if (userName.length() > 30) {
             response.put("message", "userName is too large!");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(response);
