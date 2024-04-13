@@ -61,7 +61,9 @@ public class UserInfo {
 
     @Column(name = "bjetBatch")
     private String bjetBatch;
-    @Column(name = "about")
+    @Column(name = "about",
+            columnDefinition = "TEXT"
+    )
     private String about;
 
     @Column(name = "address")
