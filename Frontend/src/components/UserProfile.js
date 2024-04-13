@@ -1,4 +1,3 @@
-// UserProfile.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UserProfile.css';
@@ -23,11 +22,8 @@ function UserProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // User Information
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
-  console.log('User Info:', userInfo);
-  console.log('User:', user);
 
   useEffect(() => {
     axios.get(`/api/users/${id}`)
@@ -35,6 +31,17 @@ function UserProfile() {
         setUser(response.data);
         setLoading(false);
         console.log('User fetched:', response.data);
+
+        // Populate the form with existing user information
+        setUpdatedProfile({
+          bjetBatch: response.data.bjetBatch || '',
+          about: response.data.about || '',
+          address: response.data.address || '',
+          company: response.data.company || '',
+          position: response.data.position || '',
+          technologyStack: response.data.technologyStack || '',
+          social: response.data.social || ''
+        });
       })
       .catch(error => {
         console.error('Error fetching user:', error);
@@ -42,10 +49,8 @@ function UserProfile() {
       });
   }, [id]);
 
-  const isCurrentUserProfile = userInfo && user && userInfo.username === user.userName;
-
   const handleInputChange = (e) => {
-  const { name, value } = e.target;
+    const { name, value } = e.target;
     setUpdatedProfile(prevState => ({
       ...prevState,
       [name]: value
@@ -53,41 +58,33 @@ function UserProfile() {
   };
 
   const handleSubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
   
-  // Create a new FormData instance
-  const formData = new FormData();
+    const formData = new FormData();
   
-  // Append each property of updatedProfile to formData
-  for (const key in updatedProfile) {
-    formData.append(key, updatedProfile[key]);
-  }
-  
-  // Send a PUT request to update the user's profile
-  axios.post(`/api/username/${user.userName}`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
+    for (const key in updatedProfile) {
+      formData.append(key, updatedProfile[key]);
     }
-  })
-  .then(response => {
-    // Handle successful update
-    console.log('Profile updated successfully:', response.data);
-    // Optionally, you can navigate the user back to their profile page
-    navigate(`/users/${id}`);
-    // Exit edit mode after updating profile
-    setIsEditMode(false);
-  })
-  .catch(error => {
-    // Handle error
-    console.error('Error updating profile:', error);
-  });
-};
-
+  
+    axios.post(`/api/username/${user.userName}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(response => {
+      console.log('Profile updated successfully:', response.data);
+      navigate(`/users/${id}`);
+      setIsEditMode(false);
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error updating profile:', error);
+    });
+  };
 
   if (loading) {
     return <div>Loading...</div>;
   }
-
 
   return (
     <div className='user-profile'>
@@ -147,7 +144,6 @@ function UserProfile() {
                 value={updatedProfile.social}
                 onChange={handleInputChange}
               />
-              {/* Optionally, add file input for image */}
               <label>Profile Picture:</label>
               <div className="file-input">
                 <input
@@ -174,13 +170,13 @@ function UserProfile() {
             {user.technologyStack && <p><b>Technology Stack:</b> {user.technologyStack}</p>}
             {user.social && <p><b>Social:</b> {user.social}</p>}
 
-            {isCurrentUserProfile && (
+            {userInfo && userInfo.username === user.userName && (
               <button className="styled-btn" onClick={() => setIsEditMode(true)}>Update Profile</button>
             )}
           </>
         )}
       </div>
-      {!isCurrentUserProfile && <NotificationMenu userInfo={userInfo} user={user} />}
+      {userInfo && userInfo.username !== user.userName && <NotificationMenu userInfo={userInfo} user={user} />}
     </div>
   );
 }
