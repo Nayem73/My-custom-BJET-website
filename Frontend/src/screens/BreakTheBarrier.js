@@ -7,8 +7,8 @@ function BreakTheBarrier() {
         <div className="container">
             <div className="card">
                 <div className="card-body">
-                    <h2 className="card-title">Break the Barrier</h2>
-                    <p>This section should contain unique learning roadmap, steps, materials and resources in an organized format that will help narrow the gap between Bangla and Japanese language and culture.</p>
+                    <h2 className="card-title" style={{ fontSize: '28px' }}>Break the Barrier</h2>
+                    <p className="highlighted-text">This section should contain unique learning roadmap, steps, materials and resources in an organized format that will help narrow the gap between Bangla and Japanese language and culture.</p>
                     
                     <div className="pdf-container">
                         <iframe src={Hiragana} title="Hiragana PDF" className="pdf-viewer"></iframe>
@@ -18,5 +18,4 @@ function BreakTheBarrier() {
         </div>
     );
 }
-
 export default BreakTheBarrier;

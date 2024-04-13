@@ -10,7 +10,7 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
-    width: 90%;
+    width: 70%;
 }
 
 .card-body {
@@ -25,9 +25,19 @@
 }
 
 .card-body p {
-    font-size: 16px;
+    font-size: 18px;
+    /* increased font size */
     line-height: 1.5;
     margin-bottom: 15px;
+}
+
+.highlighted-text {
+    background-color: rgba(111, 255, 0, 0.732);
+    /* added background color */
+    padding: 10px;
+    /* added padding */
+    border-radius: 5px;
+    /* added border-radius */
 }
 
 .pdf-container {
