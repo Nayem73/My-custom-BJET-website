@@ -14,6 +14,7 @@ import UserProfile from './components/UserProfile';
 import AboutUs from './components/AboutUs';
 import UserListScreen from './screens/AdminUserListScreen';
 import BjetResourceScreen from './screens/BjetResourceScreen';
+import BreakTheBarrier from './screens/BreakTheBarrier';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path='/aboutus' element={<AboutUs />} />
           <Route path='/admin/userlist/' element={<UserListScreen />} />
           <Route path='/resources' element={<BjetResourceScreen />} />
+          <Route path='/break-the-barrier' element={<BreakTheBarrier />} />
         </Routes>
     </>
   );  
