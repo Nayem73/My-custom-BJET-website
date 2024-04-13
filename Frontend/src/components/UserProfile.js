@@ -46,8 +46,9 @@ function UserProfile() {
       .catch(error => {
         console.error('Error fetching user:', error);
         setLoading(false);
+        navigate('/login');
       });
-  }, [id]);
+  }, [id, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
