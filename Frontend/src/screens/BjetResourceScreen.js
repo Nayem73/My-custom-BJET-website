@@ -2,6 +2,7 @@ import React from 'react';
 import successStory1 from '../images/successStory1.jpg';
 import successStory2 from '../images/successStory2.jpg';
 import successStory3 from '../images/successStory3.jpg';
+import './BjetResourceScreen.css';
 
 function BjetResourceScreen() {
     return (
