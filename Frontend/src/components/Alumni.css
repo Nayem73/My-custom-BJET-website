@@ -17,18 +17,20 @@ h1 {
 }
 
 .cards__wrapper {
-    position: relative;
     margin: 50px 0 45px;
 }
 
 .cards__items {
-    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .cards__item {
-    display: flex;
-    flex: 1;
-    margin: 0 1rem;
+    flex: 1 0 calc(25% - 2rem);
+    /* Adjusted width to fit 4 cards in a row with margins */
+    margin: 0 1rem 2rem;
+    /* Added margin-bottom for spacing between rows */
     border-radius: 10px;
 }
 
@@ -105,9 +107,16 @@ h1 {
     }
 }
 
-@media only screen and (min-width: 1024px) {
-    .cards__items {
-        display: flex;
+@media only screen and (max-width: 1024px) {
+    .cards__item {
+        flex: 1 0 calc(50% - 2rem);
+        /* Adjusted width to fit 2 cards in a row on smaller screens */
+    }
+}
+@media only screen and (max-width: 768px) {
+    .cards__item {
+        flex: 1 0 100%;
+        /* Full width for single card on mobile */
     }
 }
 
