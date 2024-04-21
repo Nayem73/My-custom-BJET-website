@@ -176,10 +176,10 @@ public class UserReviewController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
         }
 
-        // Check if the comment text size is more than 200 characters
-        if (text.length() > 200) {
+        // Check if the comment text size is more than 20000 characters
+        if (text.length() > 20000) {
             Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("message", "comment size exceeds the limit of 200 characters.");
+            errorResponse.put("message", "comment size exceeds the limit of 20000 characters.");
             return ResponseEntity.badRequest().body(errorResponse);
         }
 
