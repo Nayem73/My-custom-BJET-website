@@ -169,15 +169,15 @@ public class UserReviewController {
         UserReview userReview = optionalUserReview.get();
 
         // Check if the logged-in user is the owner of the review
-        String userName = authentication.getName();
-        if (!userReview.getUserInfo().getUserName().equals(userName)) {
-            Map<String, Object> response = new LinkedHashMap<>();
-            response.put("message", "Only the user who made the review can edit this review.");
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
-        }
+//        String userName = authentication.getName();
+//        if (!userReview.getUserInfo().getUserName().equals(userName)) {
+//            Map<String, Object> response = new LinkedHashMap<>();
+//            response.put("message", "Only the user who made the review can edit this review.");
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+//        }
 
         // Check if the comment text size is more than 20000 characters
-        if (text.length() > 20000) {
+        if (text != null && text.length() > 20000) {
             Map<String, Object> errorResponse = new HashMap<>();
             errorResponse.put("message", "comment size exceeds the limit of 20000 characters.");
             return ResponseEntity.badRequest().body(errorResponse);
