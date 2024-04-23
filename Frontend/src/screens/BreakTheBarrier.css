@@ -51,11 +51,24 @@
 .btb-pdf-container {
     position: relative;
     width: 100%;
-    height: 5000px;
+    height: 4200px;
     /* Adjust the height as needed */
 }
 
 .btb-pdf-viewer {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.btb-game-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    /* Adjust the height as needed */
+}
+
+.btb-game-viewer {
     width: 100%;
     height: 100%;
     border: none;

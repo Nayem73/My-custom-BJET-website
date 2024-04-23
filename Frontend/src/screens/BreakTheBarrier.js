@@ -13,6 +13,10 @@ function BreakTheBarrier() {
                     <div className="btb-pdf-container">
                         <iframe src={Hiragana} title="Hiragana PDF" className="btb-pdf-viewer"></iframe>
                     </div>
+
+                    <div className="btb-game-container">
+                        <iframe src="https://drlingua.com/japanese/games/kana-bento/" title="Kana Bento Game" className="btb-game-viewer"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
