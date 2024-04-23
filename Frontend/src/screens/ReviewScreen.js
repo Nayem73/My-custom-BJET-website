@@ -21,14 +21,6 @@ function ReviewScreen() {
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
 
-    // useEffect(() => {
-    //     if (!userInfo) {
-    //         history('/login')
-    //     }
-    // }, [dispatch])
-
-
-
     const reviewCreate = useSelector(state => state.reviewCreate);
     const {  error: errorReviewCreate, success: successReviewCreate } = reviewCreate;
 
@@ -37,6 +29,7 @@ function ReviewScreen() {
 
     const reviewList = useSelector(state => state.reviewList);
     const { loading: loadingReviewList, error: errorReviewList, reviews, cur_page, total_page } = reviewList;
+    console.log('Reviews:<<<<<<<<<<< ', reviews)
 
     const reviewDelete = useSelector(state => state.reviewDelete);
     const {  success: successReviewDelete } = reviewDelete;

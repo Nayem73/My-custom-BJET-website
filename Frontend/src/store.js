@@ -42,6 +42,13 @@ import {
     reviewListReducer,
     reviewUpdateReducer } from './reducers/reviewReducers';
 
+import {
+    resourceCreateReducer,
+    resourceDeleteReducer,
+    resourceListReducer,
+    resourceUpdateReducer
+} from './reducers/resourcesReducers';    
+
 
 import {
     subscriptionReducer,
@@ -93,6 +100,11 @@ const reducer = combineReducers({
     reviewDelete: reviewDeleteReducer,
     reviewCreate: reviewCreateReducer,
     reviewUpdate: reviewUpdateReducer,
+
+    resourceList: resourceListReducer,
+    resourceDelete: resourceDeleteReducer,
+    resourceCreate: resourceCreateReducer,
+    resourceUpdate: resourceUpdateReducer,
 
     subscription: subscriptionReducer,
     subscriptionCheck: subscriptionCheckdReducer,

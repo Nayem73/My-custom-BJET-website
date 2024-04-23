@@ -2,12 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Message from '../components/Message';
-import Paginate from '../components/Paginate';
-import SuccessMessage from '../components/SuccessMessage';
 import Loader from '../components/Loader';
-import { listReviews, deleteReview, createReview, updateReview } from '../actions/reviewActions';
-import ReactMarkdown from 'react-markdown';
-import './BjetResourceScreen.css';
+import SuccessMessage from '../components/SuccessMessage';
+import Paginate from '../components/Paginate';
+
+import {
+    listResources,
+    deleteResources,
+    createResources,
+    updateResources
+} from '../actions/resourcesActions';
 
 function BjetResourceScreen() {
     const dispatch = useDispatch();
@@ -15,85 +19,80 @@ function BjetResourceScreen() {
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
 
-    const reviewCreate = useSelector(state => state.reviewCreate);
-    const { error: errorReviewCreate, success: successReviewCreate } = reviewCreate;
+    const resourceCreate = useSelector(state => state.resourceCreate);
+    const { error: errorResourceCreate, success: successResourceCreate } = resourceCreate;
 
-    const reviewUpdate = useSelector(state => state.reviewUpdate);
-    const { error: errorReviewUpdate, success: successReviewUpdate } = reviewUpdate;
+    const resourceUpdate = useSelector(state => state.resourceUpdate);
+    const { error: errorResourceUpdate, success: successResourceUpdate } = resourceUpdate;
 
-    const reviewList = useSelector(state => state.reviewList);
-    const { loading: loadingReviewList, error: errorReviewList, reviews, cur_page, total_page } = reviewList;
+    const resourceList = useSelector(state => state.resourceList);
+    const { loading: loadingResourceList, error: errorResourceList, resources, cur_page, total_page } = resourceList;
 
-    const reviewDelete = useSelector(state => state.reviewDelete);
-    const { success: successReviewDelete } = reviewDelete;
+    const resourceDelete = useSelector(state => state.resourceDelete);
+    const { success: successResourceDelete } = resourceDelete;
 
-    const [editingReview, setEditingReview] = useState(false);
+    const [editingResource, setEditingResource] = useState(false);
     const [imageFile, setImageFile] = useState(null);
-    const [usingCamera, setUsingCamera] = useState(false);
-    const [reviewId, setReviewId] = useState(null);
+    const [resourceId, setResourceId] = useState(null);
     const formRef = useRef(null);
 
-    const [userIds, setUserIds] = useState({});
+    const [formData, setFormData] = useState({
+        img: null,
+        description: ''
+    });
 
     useEffect(() => {
-        dispatch(listReviews());
-    }, [dispatch]);
-
-    useEffect(() => {
-        const fetchUserIds = async () => {
-            const userIdsObject = {};
-            for (const review of reviews) {
-                try {
-                    const response = await fetch(`/api/username/${review.userName}`);
-                    if (response.ok) {
-                        const data = await response.json();
-                        userIdsObject[review.userName] = data.id;
-                    } else {
-                        console.error('Error fetching user ID for username:', review.userName, response.statusText);
-                    }
-                } catch (error) {
-                    console.error('Error fetching user ID for username:', review.userName, error);
-                }
-            }
-            setUserIds(userIdsObject);
-        };
-
-        if (reviews.length > 0) {
-            fetchUserIds();
+        dispatch(listResources());
+        if (successResourceCreate || successResourceUpdate) {
+            setFormData({
+                img: null,
+                description: ''
+            });
+            setImageFile(null);
+            handleReset();
+            setResourceId(null);
+            setEditingResource(false);
         }
-    }, [reviews]);
+    }, [dispatch, successResourceDelete, successResourceCreate, successResourceUpdate]);
 
     const deleteHandler = (id) => {
-        if (window.confirm('Are you sure')) {
-            dispatch(deleteReview(id));
+        if (window.confirm('Are you sure?')) {
+            dispatch(deleteResources(id));
         }
     };
 
     const updateHandler = (id) => {
-        setReviewId(id);
-        const review = reviews.find((review) => review.reviewId === id);
+        setResourceId(id);
+        const resource = resources.find((resource) => resource.resourceId === id);
+        setFormData({
+            img: null,
+            description: resource.description
+        });
         formRef.current.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
         });
-        setEditingReview(true);
+        setEditingResource(true);
     };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            img: file,
+        }));
         setImageFile(file);
-        setUsingCamera(false);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formDataToSend = new FormData();
-        formDataToSend.append('img', imageFile);
-        formDataToSend.append('comment', e.target.comment.value);
-        if (reviewId) {
-            dispatch(updateReview(reviewId, formDataToSend));
+        formDataToSend.append('img', formData.img);
+        formDataToSend.append('description', formData.description);
+        if (resourceId) {
+            dispatch(updateResources(resourceId, formDataToSend));
         } else {
-            dispatch(createReview(formDataToSend));
+            dispatch(createResources(formDataToSend));
         }
     };
 
@@ -102,73 +101,121 @@ function BjetResourceScreen() {
     };
 
     const editCancelHandler = () => {
+        setFormData({
+            img: null,
+            description: ''
+        });
         setImageFile(null);
-        setUsingCamera(false);
         handleReset();
-        setReviewId(null);
-        setEditingReview(false);
+        setResourceId(null);
+        setEditingResource(false);
     };
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            {loadingReviewList ? <Loader /> : errorReviewList ? <div className="flex justify-center"><Message message={errorReviewList} /></div> :
-                <div className="-m-4">
-                    {reviews.map((review) => (
-                        <div className="p-4 review my-4 lg:mx-10 md:mx-2 sm:mx-2" key={review.reviewId}>
-                            <div className="h-full lg:px-8 md:px-4 sm:px-4 py-10 lg:border-2 md:border-2 border-gray-200 rounded-lg dark:border-gray-800">
-                                <div className="flex flex-col mb-3">
-                                    <div className="inline-flex items-center justify-center flex-shrink-0 w-15 h-10 mb-5 py-2 text-blue-500 bg-blue-100 rounded-full dark:bg-blue-500 dark:text-blue-100">
-                                        <i className="fa-regular fa-user fa-2xl lg:px-8 md:px-4 sm:px-2"></i>
-                                        <Link to={`/users/${userIds[review.userName]}`} className='lg:px-8 md:px-4 sm:px-2 font-bold text-xl title-font' style={{ color: 'white' }}>
-                                            {review.userName}
-                                        </Link>
-                                    </div>
-                                    <div className="flex-grow rounded-lg dark:border-gray-800 dark:bg-gray-100 p-8 dark:hover:bg-gray-200 transition duration-500 ease-in-out">
-                                        <ReactMarkdown>{review.comment}</ReactMarkdown>
-                                    </div>
+        <div>
+            {/* ... */}
+            <div className="container px-5 py-4 mx-auto">
+                {loadingResourceList ? (
+                    <Loader />
+                ) : errorResourceList ? (
+                    <div className="flex justify-center">
+                        <Message message={errorResourceList} />
+                    </div>
+                ) : (
+                    <div className="-m-4">
+                        {resources.map((resource) => (
+                            <div key={resource.resourceId} className="p-4 review my-4 lg:mx-10 md:mx-2 sm:mx-2">
+                                {/* ... */}
+                                <div className="flex flex-col  mb-3">
+                                    {/* ... */}
+                                    {resource.img && (
+                                        <div className="flex-grow p-4 lg:w-1/3 md:w-1/2 card">
+                                            <img src={resource.img} alt={resource.description} fluid rounded />
+                                        </div>
+                                    )}
+                                    {/* ... */}
                                 </div>
                                 <div className="flex justify-center">
-                                    {(userInfo && userInfo.username === review.userName) && <button className="inline-flex px-4 py-2 text-base font-semibold text-white transition duration-500 ease-in-out transform bg-blue-500 border-blue-500 rounded-lg hover:bg-blue-700 hover:border-blue-700 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2" onClick={() => updateHandler(review.reviewId)}>Edit</button>}
-                                    {(userInfo && (userInfo.username === review.userName || userInfo.isSuperAdmin)) && <button className="inline-flex px-4 py-2 ml-4 text-base font-semibold text-white transition duration-500 ease-in-out transform bg-red-500 border-red-500 rounded-lg hover:bg-red-700 hover:border-red-700 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2" onClick={() => deleteHandler(review.reviewId)}>Delete</button>}
+                                    {userInfo && userInfo.username === resource.userName && (
+                                        <button className="inline-flex px-4 py-2 text-base font-semibold text-white transition duration-500 ease-in-out transform bg-blue-500 border-blue-500 rounded-lg hover:bg-blue-700 hover:border-blue-700 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2" onClick={() => updateHandler(resource.resourceId)}>Edit</button>
+                                    )}
+                                    {userInfo && (userInfo.username === resource.userName || userInfo.isSuperAdmin) && (
+                                        <button className="inline-flex px-4 py-2 ml-4 text-base font-semibold text-white transition duration-500 ease-in-out transform bg-red-500 border-red-500 rounded-lg hover:bg-red-700 hover:border-red-700 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2" onClick={() => deleteHandler(resource.resourceId)}>Delete</button>
+                                    )}
                                 </div>
-                                <p className="pt-2 text-sm text-gray-500">Created: {review.created}</p>
+                                <p className="pt-2 text-sm text-gray-500">Created: {resource.created}</p>
                             </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+            {/* ... */}
+            <div className="container px-5 py-10 mx-auto">
+                <div className="flex flex-wrap -m-4">
+                    <div className="p-4 w-full">
+                        {/* ... */}
+                        <div className="flex justify-center mb-5 mt-5">
+                            {errorResourceCreate && <Message message={errorResourceCreate} />}
+                            {successResourceCreate && <SuccessMessage message={"Resource is added successfully"} />}
+                            {errorResourceUpdate && <Message message={errorResourceUpdate} />}
+                            {successResourceUpdate && <SuccessMessage message={"Resource is updated"} />}
                         </div>
-                    ))}
-                </div>}
-            <div className='lg:px-20 mt-10 mr-5 ml-5 mb-10 w-3/4'>
-                <form ref={formRef} id="myForm" onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="img">Image:</label>
-                        <input
-                            type="file"
-                            id="img"
-                            name="img"
-                            accept=".png, .jpg, .jpeg"
-                            onChange={handleImageChange}
-                        />
-                    </div>
-                    <div data-color-mode="light">
-                        <label htmlFor="comment">Comment:</label>
-                        <textarea
-                            required
-                            type="text"
-                            id="comment"
-                            name="comment"
-                            defaultValue={editingReview ? reviews.find((review) => review.reviewId === reviewId).comment : ''}
-                        />
-                    </div>
-                    <div className='py-4 flex justify-left'>
-                        {editingReview ? (
-                            <>
-                                <button type='submit' className=' btn btn-primary w-24'>Update</button>
-                                <div onClick={() => editCancelHandler()} className=' btn btn-primary w-24 mx-5'>Cancel</div>
-                            </>
+                        {userInfo ? (
+                            <div className='lg:px-20 mt-10 mr-5 ml-5 mb-10 w-3/4'>
+                                <form ref={formRef} id="myForm" onSubmit={handleSubmit}>
+                                    {imageFile && (
+                                        <div className="container-aisearch">
+                                            <div className="ai_img">
+                                                <img
+                                                    src={URL.createObjectURL(imageFile)}
+                                                    alt="Uploaded"
+                                                    className="uploaded-image"
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+                                    <div>
+                                        <label htmlFor="img">Image:</label>
+                                        <input
+                                            type="file"
+                                            id="img"
+                                            name="img"
+                                            accept=".png, .jpg, .jpeg"
+                                            onChange={handleImageChange}
+                                        />
+                                    </div>
+                                    <div data-color-mode="light">
+                                        <label htmlFor="description">Description:</label>
+                                        <textarea
+                                            required
+                                            type="text"
+                                            id="description"
+                                            name="description"
+                                            value={formData.description}
+                                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className='py-4 flex justify-left'>
+                                        {editingResource ? (
+                                            <>
+                                                <button type='submit' className='btn btn-primary w-24'>Update</button>
+                                                <div onClick={editCancelHandler} className='btn btn-primary w-24 mx-5'>Cancel</div>
+                                            </>
+                                        ) : (
+                                            <button type='submit' className='btn btn-primary w-24'>Submit</button>
+                                        )}
+                                    </div>
+                                </form>
+                            </div>
                         ) : (
-                            <button type='submit' className=' btn btn-primary w-24'>Submit</button>
+                            <div className="flex justify-center m-10">
+                                <div className="flex-grow  rounded-lg dark:border-red-800 dark:bg-red-100 p-8 dark:hover:bg-red-200 transition duration-500 ease-in-out justify-center">
+                                    <p className="text-base leading-relaxed ">Please <Link to={'/login'} className="font-bold text-blue-500">Login</Link> to create or update posts</p>
+                                </div>
+                            </div>
                         )}
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     );
