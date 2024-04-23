@@ -29,7 +29,6 @@ function ReviewScreen() {
 
     const reviewList = useSelector(state => state.reviewList);
     const { loading: loadingReviewList, error: errorReviewList, reviews, cur_page, total_page } = reviewList;
-    console.log('Reviews:<<<<<<<<<<< ', reviews)
 
     const reviewDelete = useSelector(state => state.reviewDelete);
     const {  success: successReviewDelete } = reviewDelete;

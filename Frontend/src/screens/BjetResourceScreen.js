@@ -27,6 +27,7 @@ function BjetResourceScreen() {
 
     const resourceList = useSelector(state => state.resourceList);
     const { loading: loadingResourceList, error: errorResourceList, resources, cur_page, total_page } = resourceList;
+    console.log("finally, the retrieved resources", resources);
 
     const resourceDelete = useSelector(state => state.resourceDelete);
     const { success: successResourceDelete } = resourceDelete;
