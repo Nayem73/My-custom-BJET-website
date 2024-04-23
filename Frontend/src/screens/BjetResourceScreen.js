@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-
-import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Message from '../components/Message';
@@ -8,6 +6,7 @@ import Paginate from '../components/Paginate';
 import SuccessMessage from '../components/SuccessMessage';
 import Loader from '../components/Loader';
 import { listReviews, deleteReview, createReview, updateReview } from '../actions/reviewActions';
+import ReactMarkdown from 'react-markdown';
 import './BjetResourceScreen.css';
 
 function BjetResourceScreen() {
@@ -115,7 +114,7 @@ function BjetResourceScreen() {
             {loadingReviewList ? <Loader /> : errorReviewList ? <div className="flex justify-center"><Message message={errorReviewList} /></div> :
                 <div className="-m-4">
                     {reviews.map((review) => (
-                        <div className="p-4 review my-4 lg:mx-10 md:mx-2 sm:mx-2">
+                        <div className="p-4 review my-4 lg:mx-10 md:mx-2 sm:mx-2" key={review.reviewId}>
                             <div className="h-full lg:px-8 md:px-4 sm:px-4 py-10 lg:border-2 md:border-2 border-gray-200 rounded-lg dark:border-gray-800">
                                 <div className="flex flex-col mb-3">
                                     <div className="inline-flex items-center justify-center flex-shrink-0 w-15 h-10 mb-5 py-2 text-blue-500 bg-blue-100 rounded-full dark:bg-blue-500 dark:text-blue-100">
@@ -124,16 +123,8 @@ function BjetResourceScreen() {
                                             {review.userName}
                                         </Link>
                                     </div>
-                                    {(review.img !== undefined && review.img !== null && review.img !== "" && review.img !== "null")
-                                        ? <>
-                                            <div className="flex-grow p-4 lg:w-1/3 md:w-1/2 card">
-                                                <img src={review.img} alt={review.userName} fluid rounded />
-                                            </div>
-                                            <hr className="mb-5 mt-5" style={{ color: '#000000' }} />
-                                        </>
-                                        : <></>}
                                     <div className="flex-grow rounded-lg dark:border-gray-800 dark:bg-gray-100 p-8 dark:hover:bg-gray-200 transition duration-500 ease-in-out">
-                                        <p className="text-base leading-relaxed">{review.comment}</p>
+                                        <ReactMarkdown>{review.comment}</ReactMarkdown>
                                     </div>
                                 </div>
                                 <div className="flex justify-center">
@@ -145,6 +136,40 @@ function BjetResourceScreen() {
                         </div>
                     ))}
                 </div>}
+            <div className='lg:px-20 mt-10 mr-5 ml-5 mb-10 w-3/4'>
+                <form ref={formRef} id="myForm" onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="img">Image:</label>
+                        <input
+                            type="file"
+                            id="img"
+                            name="img"
+                            accept=".png, .jpg, .jpeg"
+                            onChange={handleImageChange}
+                        />
+                    </div>
+                    <div data-color-mode="light">
+                        <label htmlFor="comment">Comment:</label>
+                        <textarea
+                            required
+                            type="text"
+                            id="comment"
+                            name="comment"
+                            defaultValue={editingReview ? reviews.find((review) => review.reviewId === reviewId).comment : ''}
+                        />
+                    </div>
+                    <div className='py-4 flex justify-left'>
+                        {editingReview ? (
+                            <>
+                                <button type='submit' className=' btn btn-primary w-24'>Update</button>
+                                <div onClick={() => editCancelHandler()} className=' btn btn-primary w-24 mx-5'>Cancel</div>
+                            </>
+                        ) : (
+                            <button type='submit' className=' btn btn-primary w-24'>Submit</button>
+                        )}
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
