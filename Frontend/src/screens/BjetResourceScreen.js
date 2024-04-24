@@ -111,6 +111,8 @@ function BjetResourceScreen() {
         setResourceId(null);
         setEditingResource(false);
     };
+                                    console.log("formData", formData);
+
 
     return (
         <div>
@@ -132,6 +134,11 @@ function BjetResourceScreen() {
                                     {resource.img && (
                                         <div className="flex-grow p-4 lg:w-1/3 md:w-1/2 card">
                                             <img src={resource.img} alt={resource.description} fluid rounded />
+                                        </div>
+                                    )}
+                                    {resource.description && (
+                                        <div className="description">
+                                            <p>{resource.description}</p>
                                         </div>
                                     )}
                                     {/* ... */}
