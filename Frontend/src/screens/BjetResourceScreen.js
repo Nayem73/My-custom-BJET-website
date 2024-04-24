@@ -5,6 +5,8 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import SuccessMessage from '../components/SuccessMessage';
 import Paginate from '../components/Paginate';
+import ReactMarkdown from 'react-markdown';
+import './BjetResourceScreen.css';
 
 import {
     listResources,
@@ -136,12 +138,19 @@ function BjetResourceScreen() {
                                             <img src={resource.img} alt={resource.description} fluid rounded />
                                         </div>
                                     )}
-                                    {resource.description && (
+                                    {/* {resource.description && (
                                         <div className="description">
                                             <p>{resource.description}</p>
                                         </div>
-                                    )}
+                                    )} */}
                                     {/* ... */}
+                                    {/* markdown instead of plain text */}
+                                    {resource.description && (
+                                    <div className="description">
+                                        <ReactMarkdown>{resource.description}</ReactMarkdown>
+                                    </div>
+                                    )}
+
                                 </div>
                                 <div className="flex justify-center">
                                     {userInfo && userInfo.username === resource.userName && (
