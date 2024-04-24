@@ -28,8 +28,7 @@ function BjetResourceScreen() {
     const { error: errorResourceUpdate, success: successResourceUpdate } = resourceUpdate;
 
     const resourceList = useSelector(state => state.resourceList);
-    const { loading: loadingResourceList, error: errorResourceList, resources, cur_page, total_page } = resourceList;
-    console.log("finally, the retrieved resources", resources);
+    const { loading: loadingResourceList, error: errorResourceList, resources } = resourceList;
 
     const resourceDelete = useSelector(state => state.resourceDelete);
     const { success: successResourceDelete } = resourceDelete;
@@ -113,8 +112,6 @@ function BjetResourceScreen() {
         setResourceId(null);
         setEditingResource(false);
     };
-                                    console.log("formData", formData);
-
 
     return (
         <div>
@@ -130,27 +127,19 @@ function BjetResourceScreen() {
                     <div className="-m-4">
                         {resources.map((resource) => (
                             <div key={resource.resourceId} className="p-4 review my-4 lg:mx-10 md:mx-2 sm:mx-2">
-                                {/* ... */}
                                 <div className="flex flex-col  mb-3">
-                                    {/* ... */}
-                                    {resource.img && (
-                                        <div className="flex-grow p-4 lg:w-1/3 md:w-1/2 card">
-                                            <img src={resource.img} alt={resource.description} fluid rounded />
+                                    {resource.img ? (
+                                        <div className="flex-grow card">
+                                            <img src={resource.img} alt={resource.description} className="card-img-top" />
+                                            <div className="card-body">
+                                                <ReactMarkdown>{resource.description}</ReactMarkdown>
+                                            </div>
                                         </div>
-                                    )}
-                                    {/* {resource.description && (
+                                    ) : (
                                         <div className="description">
-                                            <p>{resource.description}</p>
+                                            <ReactMarkdown>{resource.description}</ReactMarkdown>
                                         </div>
-                                    )} */}
-                                    {/* ... */}
-                                    {/* markdown instead of plain text */}
-                                    {resource.description && (
-                                    <div className="description">
-                                        <ReactMarkdown>{resource.description}</ReactMarkdown>
-                                    </div>
                                     )}
-
                                 </div>
                                 <div className="flex justify-center">
                                     {userInfo && userInfo.username === resource.userName && (
