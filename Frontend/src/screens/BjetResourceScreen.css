@@ -1,3 +1,5 @@
+/* BjetResourceScreen.css */
+
 .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -10,12 +12,11 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0 auto 30px auto;
-    /* top, right, bottom, left */
-    width: 80%;
+    width: 70%;
 }
+
 .card-img-top {
     width: 100%;
-    /* Removed max-height and object-fit */
     border-bottom: 1px solid #e0e0e0;
 }
 
@@ -49,4 +50,73 @@
 
 .card-body a:hover {
     color: #0056b3;
+}
+
+/* Markdown preview styling */
+.markdown-preview {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.markdown-preview h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Form styling */
+form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #ffffff;
+}
+
+button.btn-primary {
+    background-color: #007bff;
+}
+
+button.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    form {
+        padding: 15px;
+    }
 }

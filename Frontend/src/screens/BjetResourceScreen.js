@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import SuccessMessage from '../components/SuccessMessage';
-import Paginate from '../components/Paginate';
 import ReactMarkdown from 'react-markdown';
 import './BjetResourceScreen.css';
 
@@ -43,6 +42,8 @@ function BjetResourceScreen() {
         description: ''
     });
 
+    const [markdownText, setMarkdownText] = useState(''); // New state for Markdown text
+
     useEffect(() => {
         dispatch(listResources());
         if (successResourceCreate || successResourceUpdate) {
@@ -56,6 +57,10 @@ function BjetResourceScreen() {
             setEditingResource(false);
         }
     }, [dispatch, successResourceDelete, successResourceCreate, successResourceUpdate]);
+
+    useEffect(() => {
+        setMarkdownText(formData.description); // Update Markdown text on form data change
+    }, [formData.description]);
 
     const deleteHandler = (id) => {
         if (window.confirm('Are you sure?')) {
@@ -84,6 +89,12 @@ function BjetResourceScreen() {
             img: file,
         }));
         setImageFile(file);
+    };
+
+    const handleChange = (e) => {
+        const text = e.target.value;
+        setFormData({ ...formData, description: text });
+        setMarkdownText(text); // Update Markdown text
     };
 
     const handleSubmit = (e) => {
@@ -198,8 +209,13 @@ function BjetResourceScreen() {
                                             id="description"
                                             name="description"
                                             value={formData.description}
-                                            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                            onChange={handleChange}
                                         />
+                                    </div>
+                                    {/* Markdown Preview */}
+                                    <div className="markdown-preview">
+                                        <h3>Markdown Preview</h3>
+                                        <ReactMarkdown>{markdownText}</ReactMarkdown>
                                     </div>
                                     <div className='py-4 flex justify-left'>
                                         {editingResource ? (
