@@ -179,7 +179,7 @@ function BjetResourceScreen() {
                         </div>
                         {userInfo ? (
                             <div className='lg:px-20 mt-10 mr-5 ml-5 mb-10 w-3/4'>
-                                <form ref={formRef} id="myForm" onSubmit={handleSubmit}>
+                                <form className='normal-form' ref={formRef} id="myForm" onSubmit={handleSubmit}>
                                     {imageFile && (
                                         <div className="container-aisearch">
                                             <div className="ai_img">
