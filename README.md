@@ -62,6 +62,10 @@
 
 ![](assets/2024-04-13-13-05-41-image.png)
 
+### B-JET authorities now have markdown support to further decorate the posts
+
+![](assets/2024-05-15-12-08-38-image.png)
+
 # Break The Barrier
 
 ### Learning Resources
