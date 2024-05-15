@@ -1,10 +1,4 @@
-
 https://github.com/Nayem73/My-custom-BJET-website/assets/111779609/a2399118-843a-4c2b-946e-30c593e21d0c
-
-
-https://github.com/Nayem73/My-custom-BJET-website/assets/111779609/1846deb4-5c4b-473f-8c10-430f5afbb909
-
-
 
 ![](assets/2024-04-07-22-49-26-image.png)
 
