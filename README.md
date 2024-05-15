@@ -30,13 +30,9 @@
 
 ![](assets/2024-04-13-13-03-21-image.png)
 
-
-
 # Only B-JET Super Admin can make a user a B-JET Graduate
 
 ![](assets/2024-04-13-13-04-02-image.png)
-
-
 
 # Explore the Achievements of B-JET Graduates and Ask for Guidance in Chat!
 
@@ -52,19 +48,13 @@
 
 ![](assets/2024-04-13-12-56-34-image.png)
 
-
-
 ### New received message will be notified with a popup message icon with the number of messages. Click/Hover on the icon to view the message.
 
 ![](assets/7320c3269e4cdd102745a1182f4857c926910025.png)
 
-
-
 ### Update your profile with correct info
 
 ![](assets/2024-04-13-13-01-07-image.png)
-
-
 
 # Resources
 
@@ -78,21 +68,21 @@
 
 ![](assets/2024-04-13-13-06-22-image.png)
 
+### Enjoy while you are learning with learning games
+
+![](assets/2024-05-15-11-59-54-image.png)
+
 # Community Blog
 
 ### In the Community Blog section, anyone can post about his/her interst and findings and all the registerd and unregistered users can view the blogs and share his/her findings by creating an account.
 
 ![](assets/2024-04-13-13-08-35-image.png)
 
-
-
 # About Us
 
 ### Know about background and achievements of B-JET
 
 ![](assets/2024-04-13-13-10-06-image.png)
-
-
 
 # B-JET Super Admin Account Functionality
 
