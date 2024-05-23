@@ -117,6 +117,53 @@ public class CarouselController {
                 .body(response);
     }
 
+    @PutMapping("/carousel")
+    public ResponseEntity<Map<String, Object>> editCarousel(
+            @RequestParam("img") MultipartFile file) throws IOException {
+
+        if (file.isEmpty()) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Please select an image file.");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+
+        // Check if the uploaded file is an image
+        if (!isImageFile(file)) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Only image files are allowed.");
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+
+        // Set the appropriate path to store the image (adjust this to your needs)
+        String imagePath = "src/main/resources/images";
+
+        // Create the directory if it doesn't exist
+        Path imageDir = Paths.get(imagePath);
+        if (!Files.exists(imageDir)) {
+            Files.createDirectories(imageDir);
+        }
+
+        // Generate a unique file name for the image
+        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+
+        // Save the image file using the provided path
+        Path targetPath = imageDir.resolve(fileName);
+        Files.copy(file.getInputStream(), targetPath);
+
+
+        // Create a new carousel object with the image path and the fetched carousel object
+        Carousel carousel = new Carousel("/api/picture?link=images/" + fileName);
+        carouselRepository.save(carousel);
+
+        // Create a response with the picture ID and image URL
+        Map<String, Object> response = new HashMap<>();
+        response.put("link", "/api/picture?link=images/" + fileName);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
+    }
+
 
     private boolean isImageFile(MultipartFile file) {
         String fileName = file.getOriginalFilename();
