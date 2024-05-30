@@ -5,6 +5,7 @@ import axios from 'axios';
 const Home = ({carouselItems, aboutUs}) => {
   // instead of directly passing carouselItems and aboutUs to the Home component from the App component, we can directly fetch the data from the Home component itself. This way, we can avoid passing props from the App component to the Home component.
   // like how we will fetch testimonial directly from here now:
+  //Maybe don't need it now.
   const [testimonial, setTestimonial] = useState({});
   useEffect(() => {
     axios.get('/api/testimonial')
