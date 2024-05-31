@@ -16,6 +16,7 @@ import UserListScreen from './screens/AdminUserListScreen';
 import BjetResourceScreen from './screens/BjetResourceScreen';
 import BreakTheBarrier from './screens/BreakTheBarrier';
 import AdminReviewScreen from './screens/AdminReviewScreen';
+import CarouselAdminScreen from './screens/CarouselAdminScreen';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='/resources' element={<BjetResourceScreen />} />
           <Route path='/break-the-barrier' element={<BreakTheBarrier />} />
           <Route path='/admin/review/create/' element={<AdminReviewScreen />} />
+          <Route path='/admin/carousel/' element={<CarouselAdminScreen />} />
         </Routes>
     </>
   );  
