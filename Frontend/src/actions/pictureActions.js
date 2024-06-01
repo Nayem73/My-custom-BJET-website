@@ -21,124 +21,87 @@ import {
     PICTURE_SLIDER_FAILED
 } from "../constants/pictureConstants";
 
-
-export const listPictures = (id) => async (dispatch, getState) => {
+export const listPictures = () => async (dispatch) => {
     try {
-        dispatch({
-            type: PICTURE_LIST_REQUEST
-        })
+        dispatch({ type: PICTURE_LIST_REQUEST });
 
-        const { data } = await axios.get(`/api/disease/${id}/picture/`);
-        // console.log(data);
-        dispatch({
-            type: PICTURE_LIST_SUCCESS,
-            payload: data
-        })
+        const { data } = await axios.get(`/api/carousel`);
+        dispatch({ type: PICTURE_LIST_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
             type: PICTURE_LIST_FAILED,
-            payload: error.response.data.message ? error.response.data.message :error.response? error.message : 'error'
-        })
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
     }
-}
-
+};
 
 export const sliderPicture = () => async (dispatch) => {
     try {
-        dispatch({
-            type: PICTURE_SLIDER_REQUEST
-        })
+        dispatch({ type: PICTURE_SLIDER_REQUEST });
 
-        const { data } = await axios.get(`/api/disease/`);
-        dispatch({
-            type: PICTURE_SLIDER_SUCCESS,
-            payload: data
-        })
+        const { data } = await axios.get(`/api/carousel`);
+        dispatch({ type: PICTURE_SLIDER_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
             type: PICTURE_SLIDER_FAILED,
-            payload: error.response.data.message ? error.response.data.message :error.response? error.message : 'error'
-        })
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
     }
-}
+};
 
-
-
-export const deletePicture= (id) => async (dispatch, getState) => {
+export const deletePicture = (id) => async (dispatch, getState) => {
     try {
-        dispatch({
-            type: PICTURE_DELETE_REQUEST
-        })
+        dispatch({ type: PICTURE_DELETE_REQUEST });
 
         const { userLogin: { userInfo } } = getState();
         const config = {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
-        await axios.delete(`/api/disease/picture/${id}`, config)
-        dispatch({
-            type: PICTURE_DELETE_SUCCESS,
-        })
+            headers: { Authorization: `Bearer ${userInfo.token}` }
+        };
+
+        await axios.delete(`/api/carousel/${id}`, config);
+        dispatch({ type: PICTURE_DELETE_SUCCESS });
     } catch (error) {
         dispatch({
             type: PICTURE_DELETE_FAILED,
-            payload: error.response.data.message ? error.response.data.message :error.response? error.message : 'error'
-        })
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
     }
-}
+};
 
-export const createPicture = (FormData) => async (dispatch, getState) => {
+export const createPicture = (formData) => async (dispatch, getState) => {
     try {
-        dispatch({
-            type: PICTURE_CREATE_REQUEST
-        })
+        dispatch({ type: PICTURE_CREATE_REQUEST });
 
         const { userLogin: { userInfo } } = getState();
-
         const config = {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
-        const { data } = await axios.post(`/api/disease/picture/`, FormData, config)
-        dispatch({
-            type: PICTURE_CREATE_SUCCESS,
-            payload: data
-        })
+            headers: { Authorization: `Bearer ${userInfo.token}` }
+        };
+
+        const { data } = await axios.post(`/api/carousel`, formData, config);
+        dispatch({ type: PICTURE_CREATE_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
             type: PICTURE_CREATE_FAILED,
-            payload: error.response.data.message ? error.response.data.message :error.response? error.message : 'error'
-        })
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
     }
-}
+};
 
 export const updatePicture = (id, formData) => async (dispatch, getState) => {
     try {
-        dispatch({
-            type: PICTURE_UPDATE_REQUEST
-        })
+        dispatch({ type: PICTURE_UPDATE_REQUEST });
 
         const { userLogin: { userInfo } } = getState();
-
         const config = {
-            headers: {
-                // 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        }
-        const { data } = await axios.put(`/api/disease/picture/${id}`, formData, config)
-        dispatch({
-            type: PICTURE_UPDATE_SUCCESS,
-            success: true,
-            payload: data
-        })
+            headers: { Authorization: `Bearer ${userInfo.token}` }
+        };
+
+        const { data } = await axios.put(`/api/carousel/${id}`, formData, config);
+        dispatch({ type: PICTURE_UPDATE_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
             type: PICTURE_UPDATE_FAILED,
-            payload: error.response.data.message ? error.response.data.message :error.response? error.message : 'error'
-        })
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
     }
-}
-
+};
