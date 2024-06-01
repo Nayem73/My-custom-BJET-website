@@ -117,9 +117,18 @@ public class CarouselController {
                 .body(response);
     }
 
-    @PutMapping("/carousel")
+    @PutMapping("/carousel/{carouselId}")
     public ResponseEntity<Map<String, Object>> editCarousel(
+            @PathVariable Long carouselId,
             @RequestParam("img") MultipartFile file) throws IOException {
+
+        // Fetch the existing carousel object from the database using the carouselId
+        Optional<Carousel> existingCarousel = carouselRepository.findById(carouselId);
+        if (existingCarousel.isEmpty()) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Carousel not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
 
         if (file.isEmpty()) {
             Map<String, Object> errorResponse = new HashMap<>();
@@ -150,9 +159,9 @@ public class CarouselController {
         Path targetPath = imageDir.resolve(fileName);
         Files.copy(file.getInputStream(), targetPath);
 
-
-        // Create a new carousel object with the image path and the fetched carousel object
-        Carousel carousel = new Carousel("/api/picture?link=images/" + fileName);
+        // Update the existing carousel object with the new image path
+        Carousel carousel = existingCarousel.get();
+        carousel.setImg("/api/picture?link=images/" + fileName);
         carouselRepository.save(carousel);
 
         // Create a response with the picture ID and image URL
@@ -164,11 +173,30 @@ public class CarouselController {
                 .body(response);
     }
 
-
     private boolean isImageFile(MultipartFile file) {
         String fileName = file.getOriginalFilename();
         return fileName != null && (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png"));
     }
+
+    @DeleteMapping("/carousel/{carouselId}")
+    public ResponseEntity<Map<String, String>> deleteCarousel(@PathVariable Long carouselId) {
+        Optional<Carousel> carousel = carouselRepository.findById(carouselId);
+        if (carousel.isEmpty()) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Carousel not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+
+        // Perform the delete operation
+        carouselRepository.deleteById(carouselId);
+
+        // Create a response confirming the deletion
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Carousel with ID " + carouselId + " deleted successfully");
+
+        return ResponseEntity.ok().body(response);
+    }
+
 
     @GetMapping("/aboutus")
     public ResponseEntity<Map<String, String>> getAboutUs() {
