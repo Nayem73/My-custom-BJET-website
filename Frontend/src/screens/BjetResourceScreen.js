@@ -177,7 +177,7 @@ function BjetResourceScreen() {
                             {errorResourceUpdate && <Message message={errorResourceUpdate} />}
                             {successResourceUpdate && <SuccessMessage message={"Resource is updated"} />}
                         </div>
-                        {userInfo ? (
+                        {userInfo && userInfo.isSuperAdmin ? (
                             <div className='lg:px-20 mt-10 mr-5 ml-5 mb-10 w-3/4'>
                                 <form className='normal-form' ref={formRef} id="myForm" onSubmit={handleSubmit}>
                                     {imageFile && (
@@ -230,10 +230,8 @@ function BjetResourceScreen() {
                                 </form>
                             </div>
                         ) : (
-                            <div className="flex justify-center m-10">
-                                <div className="flex-grow  rounded-lg dark:border-red-800 dark:bg-red-100 p-8 dark:hover:bg-red-200 transition duration-500 ease-in-out justify-center">
-                                    <p className="text-base leading-relaxed ">Please <Link to={'/login'} className="font-bold text-blue-500">Login</Link> to create or update posts</p>
-                                </div>
+                            <div >
+                                
                             </div>
                         )}
                     </div>
