@@ -23,7 +23,7 @@ export default function NotificationMenu({ userInfo, user }) {
 
   const sendHandler = () => {
     dispatch(sendNotification(userInfo.username, recipientUsername, message));
-    setRecipientUsername('');
+    // setRecipientUsername('');
     setMessage('');
   };
 
