@@ -87,5 +87,12 @@
 }
 
 .delete-button:hover {
-    color: darkred;
+    background-color: #ef8f8f;
+        /* Light grey background on hover */
+        border-radius: 4px;
+        /* Rounded corners */
+        /* padding: 0.5em; */
+        /* Some padding */
+        margin: 0.5em 0;
+        /* Space between items */
 }
