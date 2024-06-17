@@ -13,7 +13,10 @@ export const notificationListReducer = (state = { notifications: [] }, action) =
 
 export const notificationDeleteReducer = (state = {}, action) => {
   switch (action.type) {
-    // Define cases for notification delete actions
+    case 'NOTIFICATION_DELETE_SUCCESS':
+      return { loading: false, success: true };
+    case 'NOTIFICATION_DELETE_FAILED':
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

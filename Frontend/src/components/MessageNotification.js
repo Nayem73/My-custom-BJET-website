@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { listNotifications, fetchUser } from '../actions/messageActions';
+import { listNotifications, fetchUser} from '../actions/messageActions';
+import { deleteNotification } from '../actions/notificationActions';
 import { Chat } from 'react-bootstrap-icons'; // Import Chat icon from react-bootstrap-icons
 import './MessageNotification.css'; // Import the CSS file
 import { useNavigate } from 'react-router-dom';
@@ -22,25 +23,28 @@ export default function MessageNotification({ userInfo }) {
   const { user } = userFetch;
 
   useEffect(() => {
-  if (userInfo) {
-    // Fetch user data immediately
-    dispatch(fetchUser(userInfo.username));
-    dispatch(listNotifications(userInfo.username));
-
-    // Set up polling: fetch user data and notifications list every 5 seconds
-    const intervalId = setInterval(() => {
+    if (userInfo) {
+      // Fetch user data immediately
       dispatch(fetchUser(userInfo.username));
       dispatch(listNotifications(userInfo.username));
-    }, 5000);
 
-    // Clean up: clear the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }
-}, [dispatch, userInfo.username]);
+      // Set up polling: fetch user data and notifications list every 5 seconds
+      const intervalId = setInterval(() => {
+        dispatch(fetchUser(userInfo.username));
+        dispatch(listNotifications(userInfo.username));
+      }, 5000);
 
+      // Clean up: clear the interval when the component unmounts
+      return () => clearInterval(intervalId);
+    }
+  }, [dispatch, userInfo.username]);
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications); // Toggle the display of notifications
+  };
+
+  const handleDelete = (notificationId) => {
+    dispatch(deleteNotification(notificationId, userInfo.username));
   };
 
   return (
@@ -52,9 +56,12 @@ export default function MessageNotification({ userInfo }) {
       {showNotifications && notifications && (
         <div className="notification-dropdown">
           {notifications.map((notification) => (
-            <p key={notification.id} onClick={() => {navigate(`/users/${notification.senderId}`); toggleNotifications();}}>
-              <strong>{notification.senderUsername}:</strong> {notification.message}
-            </p>
+            <div key={notification.id} className="notification-item">
+              <p onClick={() => {navigate(`/users/${notification.senderId}`); toggleNotifications();}}>
+                <strong>{notification.senderUsername}:</strong> {notification.message}
+              </p>
+              <button className="delete-button" onClick={() => handleDelete(notification.id)}>X</button>
+            </div>
           ))}
         </div>
       )}

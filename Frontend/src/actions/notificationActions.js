@@ -25,3 +25,15 @@ export const sendNotification = (senderUsername, recipientUsername, message) => 
     });
   }
 };
+
+export const deleteNotification = (notificationId, username) => async (dispatch) => {
+  try {
+    await axios.delete(`/api/notification/?notificationId=${notificationId}&username=${username}`);
+    dispatch(listNotifications(username));
+  } catch (error) {
+    dispatch({
+      type: 'NOTIFICATION_DELETE_FAILED',
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
