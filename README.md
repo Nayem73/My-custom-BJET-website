@@ -52,7 +52,11 @@ https://github.com/Nayem73/My-custom-BJET-website/assets/111779609/a2399118-843a
 
 ### New received message will be notified with a popup message icon with the number of messages. Click/Hover on the icon to view the message.
 
-![](assets/7320c3269e4cdd102745a1182f4857c926910025.png)
+![](assets/1d23129cc97a05a2e70a8579972f6924d5d6882f.png)
+
+### Delete a Message
+
+
 
 ### Update your profile with correct info
 
