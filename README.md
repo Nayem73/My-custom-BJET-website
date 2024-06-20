@@ -50,13 +50,13 @@ https://github.com/Nayem73/My-custom-BJET-website/assets/111779609/a2399118-843a
 
 ![](assets/2024-04-13-12-56-34-image.png)
 
-### New received message will be notified with a popup message icon with the number of messages. Click/Hover on the icon to view the message.
+### New received message will be notified with a popup message icon with the number of messages. Click/Hover on the icon to view the message
 
 ![](assets/1d23129cc97a05a2e70a8579972f6924d5d6882f.png)
 
 ### Delete a Message
 
-
+![](assets/0768574861d16712bd4eff262f0c690fa5f8972e.png)
 
 ### Update your profile with correct info
 
